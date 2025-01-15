@@ -162,7 +162,7 @@ export default function Home() {
                   </button>
                 </a>
               </div>
-              <div className="md:w-1/3 mt-8 md:mt-0 flex items-center justify-center md:justify-end">
+              <div className="md:w-1/3 mt-8 md:mt-0 flex flex-col items-center justify-center md:justify-end">
                 <Image
                   src="/hmsa.png"
                   alt="HMSA Logo"
@@ -170,6 +170,13 @@ export default function Home() {
                   height={200}
                   style={{ objectFit: "contain" }}
                 />
+                <a
+                  href="/admin-login"
+                  className="mt-4 hover:underline font-semibold"
+                  style={{ color: "white", fontSize: "2rem" }}
+                >
+                  Admin Login
+                </a>
               </div>
             </div>
           </div>
