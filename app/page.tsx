@@ -1,12 +1,23 @@
+"use client";
 import React from "react";
 import Header from "../components/Header";
 import Image from "next/image";
+import { useState } from "react";
 import AnimatedAboutUs from "../components/AnimatedAboutUs"; // Import the new animated component
 import EventCard from "../components/EventCard"; // We'll create this component
 import SmoothScroll from "@/components/SmoothScroll";
+import AdminLoginModal from "../components/AdminLoginModal";
 import { Mail } from "lucide-react";
 
 export default function Home() {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => {
+    console.log('Modal opened'); // Check if this is printed when you click
+    setIsModalOpen(true);
+  };
+  const closeModal = () => setIsModalOpen(false);
+
   const events = [
     {
       title: "Seva & Medicine",
@@ -170,13 +181,16 @@ export default function Home() {
                   height={200}
                   style={{ objectFit: "contain" }}
                 />
-                <a
-                  href="/admin-login"
-                  className="mt-4 hover:underline font-semibold"
-                  style={{ color: "white", fontSize: "2rem" }}
+                <p
+                  onClick={openModal}
+                  className="text-white text-2xl cursor-pointer hover:underline"
                 >
                   Admin Login
-                </a>
+                </p>
+
+                {/* Render the AdminLoginModal and pass the modal state */}
+                <AdminLoginModal isModalOpen={isModalOpen} closeModal={closeModal} />
+
               </div>
             </div>
           </div>
