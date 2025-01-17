@@ -37,7 +37,7 @@ export default function AdminPage() {
         {/* Links Section centered vertically */}
         <div className="flex flex-col items-center justify-center flex-grow mb-8">
           <a
-            href="/manage-events"
+            href="/admin/manage-events"
             className="text-white text-lg underline hover:text-gray-300 mb-4"
           >
             Manage Events
