@@ -6,8 +6,6 @@ interface AdminLoginModalProps {
 }
 
 const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isModalOpen, closeModal }) => {
-  if (!isModalOpen) return null;
-
   // State for form inputs and error message
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -18,16 +16,21 @@ const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isModalOpen, closeMod
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    
+
     // Validate username and password
     if (username === hardcodedUsername && password === hardcodedPassword) {
-      setErrorMessage(""); 
+      setErrorMessage("");
       closeModal();
-      console.log("login success")
+      console.log("Login successful");
     } else {
-      setErrorMessage("Invalid username or password."); 
+      setErrorMessage("Invalid username or password.");
     }
   };
+
+  // Conditional rendering moved to the return statement
+  if (!isModalOpen) {
+    return null;
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
