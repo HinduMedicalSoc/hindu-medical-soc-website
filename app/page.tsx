@@ -54,7 +54,7 @@ export default function Home() {
   type Event = {
     id: string;
     title: string;
-    date: Timestamp;
+    date: string;
     location: string;
     description: string;
     imageUrl: string;
@@ -71,16 +71,20 @@ export default function Home() {
 
       const querySnapshot = await getDocs(q);
       const eventsList = querySnapshot.docs.map((doc) => {
-        const data = doc.data();
+        const data = doc.data() as Omit<Event, "id">;
         return {
           id: doc.id,
-          ...data,
-          // Convert Firestore Timestamp to formatted date string
-          date: data.date.toDate().toLocaleDateString("en-US", {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-          }),
+          title: data.title,
+          location: data.location,
+          description: data.description,
+          imageUrl: data.imageUrl,
+          date: (data.date as unknown as Timestamp)
+            .toDate()
+            .toLocaleDateString("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            }),
         };
       });
       setEvents(eventsList);

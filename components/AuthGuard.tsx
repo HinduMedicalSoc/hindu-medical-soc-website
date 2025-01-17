@@ -4,15 +4,18 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export function AuthGuard({ children }: { children: React.ReactNode }) {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    console.log("AuthGuard", user);
-    if (!user) {
+    if (!loading && !user) {
       router.push("/");
     }
-  }, [user, router]);
+  }, [user, loading, router]);
+
+  if (loading) {
+    return <div>Loading...</div>; // Add a loading indicator
+  }
 
   if (!user) return null;
 
