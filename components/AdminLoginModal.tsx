@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface AdminLoginModalProps {
   isModalOpen: boolean;
@@ -10,6 +11,7 @@ const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isModalOpen, closeMod
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const router = useRouter();
 
   const hardcodedUsername = "admin";
   const hardcodedPassword = "password123";
@@ -22,6 +24,7 @@ const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isModalOpen, closeMod
       setErrorMessage("");
       closeModal();
       console.log("Login successful");
+      router.push("/admin");
     } else {
       setErrorMessage("Invalid username or password.");
     }
