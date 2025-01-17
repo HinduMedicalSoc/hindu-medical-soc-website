@@ -25,26 +25,40 @@ export default function AdminPage() {
       console.error("Error logging out:", error);
     }
   };
-  if (user) {
-    return (
-      <AuthGuard>
-        <div className='p-4'>
-          <h1 className='text-2xl font-bold'>Welcome to the Admin Page</h1>
-          {/* Add your admin content here */}
-          <button
-            onClick={handleLogout}
-            className='px-4 py-2 text-sm font-medium text-white bg-red-500 rounded hover:bg-red-600'>
-            Logout
-          </button>
-        </div>
-      </AuthGuard>
-    );
-  }
+
   return (
     <AuthGuard>
-      <div className='p-4'>
-        <h1 className='text-2xl font-bold'>Welcome to the Admin Page</h1>
-        {/* Add your admin content here */}
+      <div className="relative min-h-screen flex flex-col p-4">
+        {/* Title centered horizontally */}
+        <h1 className="text-4xl font-bold mb-8 text-center">
+          Welcome to the Admin Page
+        </h1>
+        
+        {/* Links Section centered vertically */}
+        <div className="flex flex-col items-center justify-center flex-grow mb-8">
+          <a
+            href="/manage-events"
+            className="text-white text-lg underline hover:text-gray-300 mb-4"
+          >
+            Manage Events
+          </a>
+          <a
+            href="/manage-articles"
+            className="text-white text-lg underline hover:text-gray-300"
+          >
+            Manage Articles
+          </a>
+        </div>
+
+        {/* Logout Button */}
+        {user && (
+          <button
+            onClick={handleLogout}
+            className="absolute bottom-6 right-6 px-6 py-3 text-lg font-medium text-white bg-red-500 rounded hover:bg-red-600"
+          >
+            Logout
+          </button>
+        )}
       </div>
     </AuthGuard>
   );
