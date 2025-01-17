@@ -51,6 +51,11 @@ export default function AdminLoginModal({
         <div className='bg-white p-6 rounded shadow-lg w-full max-w-sm'>
           <h2 className='text-xl font-bold mb-4'>Admin Settings</h2>
           <p className='mb-4 text-black'>Logged in as: {user.email}</p>
+          <a
+              href='/admin'
+              className='text-blue-500 hover:text-blue-700'>
+              Go to Admin Page
+            </a>
           <div className='flex justify-end'>
             <button
               onClick={closeModal}
