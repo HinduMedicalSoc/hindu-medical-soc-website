@@ -78,13 +78,11 @@ export default function Home() {
           location: data.location,
           description: data.description,
           imageUrl: data.imageUrl,
-          date: (data.date as unknown as Timestamp)
-            .toDate()
-            .toLocaleDateString("en-US", {
-              month: "long",
-              day: "numeric",
-              year: "numeric",
-            }),
+          date: new Date(data.date).toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          }),
         };
       });
       setEvents(eventsList);

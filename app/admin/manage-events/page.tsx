@@ -5,7 +5,14 @@ import { signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 import { AuthGuard } from "@/components/AuthGuard";
-import { getDocs, collection, query, orderBy } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  query,
+  orderBy,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { Timestamp } from "firebase/firestore";
 import ModifiableEventCard from "@/components/ModifiableEventCard";
@@ -13,7 +20,7 @@ import ModifiableEventCard from "@/components/ModifiableEventCard";
 type Event = {
   id: string;
   title: string;
-  date: string;
+  date: string | Timestamp;
   location: string;
   description: string;
   imageUrl: string;
@@ -40,13 +47,18 @@ export default function ManageEvents() {
           location: data.location,
           description: data.description,
           imageUrl: data.imageUrl,
-          date: (data.date as unknown as Timestamp)
-            .toDate()
-            .toLocaleDateString("en-US", {
-              month: "long",
-              day: "numeric",
-              year: "numeric",
-            }),
+          date:
+            data.date instanceof Timestamp
+              ? data.date.toDate().toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                })
+              : new Date(data.date).toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                }),
         };
       });
       setEvents(eventsList);
@@ -65,11 +77,28 @@ export default function ManageEvents() {
     console.log("Deleting event:", eventId);
   };
 
-  const handleSubmitModification = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmitModification = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
-    // For now, just log. Later will integrate with DB
-    console.log("Modified event:", selectedEvent);
-    setIsModalOpen(false);
+    if (!selectedEvent) return;
+
+    try {
+      const docRef = doc(db, "events", selectedEvent.id);
+      const parsedDate = new Date(selectedEvent.date as string);
+      await updateDoc(docRef, {
+        title: selectedEvent.title,
+        date: Timestamp.fromDate(parsedDate),
+        location: selectedEvent.location,
+        description: selectedEvent.description,
+        imageUrl: selectedEvent.imageUrl,
+      });
+      console.log("Modified event:", selectedEvent);
+    } catch (error) {
+      console.error("Error updating event:", error);
+    } finally {
+      setIsModalOpen(false);
+    }
   };
 
   const handleLogout = async () => {
@@ -94,12 +123,21 @@ export default function ManageEvents() {
                   <ModifiableEventCard
                     key={event.id}
                     {...event}
+                    date={
+                      event.date instanceof Timestamp
+                        ? event.date.toDate().toLocaleDateString("en-US", {
+                            month: "long",
+                            day: "numeric",
+                            year: "numeric",
+                          })
+                        : event.date
+                    }
                     onModify={() => handleModify(event)}
                     onDelete={() => handleDelete(event.id)}
                   />
                 ))
               ) : (
-                <p>No events found.</p>
+                <p className='text-black'>No events found.</p>
               )}
             </div>
           </div>
@@ -139,13 +177,22 @@ export default function ManageEvents() {
                   <label className='block text-sm font-medium mb-1'>Date</label>
                   <input
                     type='text'
-                    value={selectedEvent?.date || ""}
+                    value={
+                      selectedEvent?.date instanceof Timestamp
+                        ? selectedEvent.date
+                            .toDate()
+                            .toLocaleDateString("en-US", {
+                              month: "long",
+                              day: "numeric",
+                              year: "numeric",
+                            })
+                        : selectedEvent?.date || ""
+                    }
                     onChange={(e) =>
                       setSelectedEvent((prev) =>
                         prev ? { ...prev, date: e.target.value } : null
                       )
                     }
-                    className='w-full p-2 border rounded'
                   />
                 </div>
 
