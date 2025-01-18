@@ -62,13 +62,13 @@ export default function ManageEvents() {
 
   const handleDelete = (eventId: string) => {
     // For now, just log. Later will integrate with DB
-    console.log('Deleting event:', eventId);
+    console.log("Deleting event:", eventId);
   };
 
   const handleSubmitModification = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // For now, just log. Later will integrate with DB
-    console.log('Modified event:', selectedEvent);
+    console.log("Modified event:", selectedEvent);
     setIsModalOpen(false);
   };
 
@@ -83,12 +83,12 @@ export default function ManageEvents() {
 
   return (
     <AuthGuard>
-      <div className="relative min-h-screen p-4">
-        <h1 className="text-4xl font-bold mb-8 text-center">Manage Events</h1>
+      <div className='relative min-h-screen p-4'>
+        <h1 className='text-4xl font-bold mb-8 text-center'>Manage Events</h1>
 
-        <section id="events" className="py-12 bg-gray-100">
-          <div className="container mx-auto px-4 max-w-7xl">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <section id='events' className='py-12 bg-gray-100'>
+          <div className='container mx-auto px-4 max-w-7xl'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
               {events.length > 0 ? (
                 events.map((event) => (
                   <ModifiableEventCard
@@ -107,91 +107,106 @@ export default function ManageEvents() {
 
         {/* Simple Modal */}
         {isModalOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white p-6 rounded-lg w-full max-w-md mx-4">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold">Modify Event</h2>
-                <button 
+          <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
+            <div className='bg-white p-6 text-black rounded-lg w-full max-w-md mx-4'>
+              <div className='flex justify-between items-center mb-4'>
+                <h2 className='text-xl font-bold'>Modify Event</h2>
+                <button
                   onClick={() => setIsModalOpen(false)}
-                  className="text-gray-500 hover:text-gray-700"
-                >
+                  className='text-gray-500 hover:text-gray-700'>
                   ✕
                 </button>
               </div>
-              
-              <form onSubmit={handleSubmitModification} className="space-y-4">
+
+              <form onSubmit={handleSubmitModification} className='space-y-4'>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Title</label>
+                  <label className='block text-sm font-medium mb-1'>
+                    Title
+                  </label>
                   <input
-                    type="text"
-                    value={selectedEvent?.title || ''}
-                    onChange={(e) => setSelectedEvent(prev => 
-                      prev ? {...prev, title: e.target.value} : null
-                    )}
-                    className="w-full p-2 border rounded"
+                    type='text'
+                    value={selectedEvent?.title || ""}
+                    onChange={(e) =>
+                      setSelectedEvent((prev) =>
+                        prev ? { ...prev, title: e.target.value } : null
+                      )
+                    }
+                    className='w-full p-2 border rounded'
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">Date</label>
+                  <label className='block text-sm font-medium mb-1'>Date</label>
                   <input
-                    type="text"
-                    value={selectedEvent?.date || ''}
-                    onChange={(e) => setSelectedEvent(prev => 
-                      prev ? {...prev, date: e.target.value} : null
-                    )}
-                    className="w-full p-2 border rounded"
+                    type='text'
+                    value={selectedEvent?.date || ""}
+                    onChange={(e) =>
+                      setSelectedEvent((prev) =>
+                        prev ? { ...prev, date: e.target.value } : null
+                      )
+                    }
+                    className='w-full p-2 border rounded'
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">Location</label>
+                  <label className='block text-sm font-medium mb-1'>
+                    Location
+                  </label>
                   <input
-                    type="text"
-                    value={selectedEvent?.location || ''}
-                    onChange={(e) => setSelectedEvent(prev => 
-                      prev ? {...prev, location: e.target.value} : null
-                    )}
-                    className="w-full p-2 border rounded"
+                    type='text'
+                    value={selectedEvent?.location || ""}
+                    onChange={(e) =>
+                      setSelectedEvent((prev) =>
+                        prev ? { ...prev, location: e.target.value } : null
+                      )
+                    }
+                    className='w-full p-2 border rounded'
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">Description</label>
+                  <label className='block text-sm font-medium mb-1'>
+                    Description
+                  </label>
                   <textarea
-                    value={selectedEvent?.description || ''}
-                    onChange={(e) => setSelectedEvent(prev => 
-                      prev ? {...prev, description: e.target.value} : null
-                    )}
-                    className="w-full p-2 border rounded"
+                    value={selectedEvent?.description || ""}
+                    onChange={(e) =>
+                      setSelectedEvent((prev) =>
+                        prev ? { ...prev, description: e.target.value } : null
+                      )
+                    }
+                    className='w-full p-2 border rounded'
                     rows={3}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">Image URL</label>
+                  <label className='block text-sm font-medium mb-1'>
+                    Image URL
+                  </label>
                   <input
-                    type="text"
-                    value={selectedEvent?.imageUrl || ''}
-                    onChange={(e) => setSelectedEvent(prev => 
-                      prev ? {...prev, imageUrl: e.target.value} : null
-                    )}
-                    className="w-full p-2 border rounded"
+                    type='text'
+                    value={selectedEvent?.imageUrl || ""}
+                    onChange={(e) =>
+                      setSelectedEvent((prev) =>
+                        prev ? { ...prev, imageUrl: e.target.value } : null
+                      )
+                    }
+                    className='w-full p-2 border rounded'
                   />
                 </div>
 
-                <div className="flex justify-end space-x-2 mt-6">
+                <div className='flex justify-end space-x-2 mt-6'>
                   <button
-                    type="button"
+                    type='button'
                     onClick={() => setIsModalOpen(false)}
-                    className="px-4 py-2 text-gray-600 hover:text-gray-800"
-                  >
+                    className='px-4 py-2 text-gray-600 hover:text-gray-800'>
                     Cancel
                   </button>
                   <button
-                    type="submit"
-                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                  >
+                    type='submit'
+                    className='px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700'>
                     Save Changes
                   </button>
                 </div>
@@ -202,8 +217,7 @@ export default function ManageEvents() {
 
         <button
           onClick={handleLogout}
-          className="absolute bottom-6 right-6 px-6 py-3 text-lg font-medium text-white bg-red-500 rounded hover:bg-red-600"
-        >
+          className='absolute bottom-6 right-6 px-6 py-3 text-lg font-medium text-white bg-red-500 rounded hover:bg-red-600'>
           Logout
         </button>
       </div>
