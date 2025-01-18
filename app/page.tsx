@@ -72,13 +72,16 @@ export default function Home() {
       const querySnapshot = await getDocs(q);
       const eventsList = querySnapshot.docs.map((doc) => {
         const data = doc.data() as Omit<Event, "id">;
+
+        const timestamp = data.date as unknown as Timestamp;
+        
         return {
           id: doc.id,
           title: data.title,
           location: data.location,
           description: data.description,
           imageUrl: data.imageUrl,
-          date: new Date(data.date).toLocaleDateString("en-US", {
+          date: timestamp.toDate().toLocaleDateString("en-US", {
             month: "long",
             day: "numeric",
             year: "numeric",
