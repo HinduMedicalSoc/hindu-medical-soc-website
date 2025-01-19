@@ -11,11 +11,13 @@ import {
   query,
   orderBy,
   doc,
-  updateDoc,
+  updateDoc
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { Timestamp } from "firebase/firestore";
 import ModifiableEventCard from "@/components/ModifiableEventCard";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 
 type Event = {
   id: string;
@@ -229,19 +231,19 @@ export default function ManageEvents() {
                 </div>
 
                 <div>
-                  <label className='block text-sm font-medium mb-1'>
-                    Image URL
-                  </label>
-                  <input
-                    type='text'
-                    value={selectedEvent?.imageUrl || ""}
-                    onChange={(e) =>
-                      setSelectedEvent((prev) =>
-                        prev ? { ...prev, imageUrl: e.target.value } : null
-                      )
-                    }
-                    className='w-full p-2 border rounded'
-                  />
+                    <label className='block text-sm font-medium mb-1'>Upload Image</label>
+                    <input
+                        type='file'
+                        accept='image/*'
+                        onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file && storage) {
+                                console.log("Selected file:", file); // Placeholder to confirm file selection
+                                
+                            }
+                        }}
+                        className='w-full p-2 border rounded'
+                    />
                 </div>
 
                 <div className='flex justify-end space-x-2 mt-6'>
