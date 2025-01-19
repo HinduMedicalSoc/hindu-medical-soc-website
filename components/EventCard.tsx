@@ -5,7 +5,7 @@ interface EventCardProps {
   date: string;
   location: string;
   description: string;
-  imageBuffer: string; // Accept the image as a buffer (base64 or binary)
+  imageUrl: string; // Accept the image as a buffer (base64 or binary)
 }
 
 const EventCard: React.FC<EventCardProps> = ({
@@ -13,7 +13,7 @@ const EventCard: React.FC<EventCardProps> = ({
   date,
   location,
   description,
-  imageBuffer,
+  imageUrl,
 }) => {
   // Function to truncate the description
   const truncateDescription = (text: string, maxLength: number) => {
@@ -21,13 +21,12 @@ const EventCard: React.FC<EventCardProps> = ({
     return text.substr(0, maxLength) + "...";
   };
 
-  console.log(imageBuffer);
 
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
       <div className="relative w-full h-auto aspect-w-4 aspect-h-3">
         <img
-          src={`data:image/jpeg;base64,${imageBuffer}`} // Display image using the buffer data
+          src={`data:image/jpeg;base64,${imageUrl}`} // Display image using the buffer data
           alt={title}
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
         />
