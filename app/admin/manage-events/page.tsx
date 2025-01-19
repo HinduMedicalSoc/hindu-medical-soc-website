@@ -16,7 +16,6 @@ import {
 import { db } from "@/lib/firebase";
 import { Timestamp } from "firebase/firestore";
 import ModifiableEventCard from "@/components/ModifiableEventCard";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 
 type Event = {
@@ -237,7 +236,7 @@ export default function ManageEvents() {
                         accept='image/*'
                         onChange={(e) => {
                             const file = e.target.files?.[0];
-                            if (file && storage) {
+                            if (file) {
                                 console.log("Selected file:", file); // Placeholder to confirm file selection
                                 
                             }
