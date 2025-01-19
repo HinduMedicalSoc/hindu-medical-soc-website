@@ -59,7 +59,7 @@ export default async function handler(req, res) {
       const fileMetadata = {
         name: file.originalFilename,
         mimeType: file.headers["content-type"],
-        parents: ["1dSpXtHtNFlAMnEK78B-Y8gMeCHtTN_MD"], // Replace with your folder ID
+        parents: [process.env.PARENT_FOLDER], // Replace with your folder ID
       };
 
       // Media object to send to Google Drive

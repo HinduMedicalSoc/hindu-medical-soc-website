@@ -32,36 +32,37 @@ export default function ManageEvents() {
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const router = useRouter();
+  const [imageBuffer, setImageBuffer] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Fetch events and format the date
-  useEffect(() => {
+ 
+    useEffect(() => {
     const fetchEvents = async () => {
-      const eventsRef = collection(db, "events");
-      const q = query(eventsRef, orderBy("date", "asc"));
+    const eventsRef = collection(db, "events");
+    const q = query(eventsRef, orderBy("date", "asc"));
 
-      const querySnapshot = await getDocs(q);
-      const eventsList = querySnapshot.docs.map((doc) => {
+    const querySnapshot = await getDocs(q);
+    const eventsList = await Promise.all(
+      querySnapshot.docs.map(async (doc) => {
         const data = doc.data() as Omit<Event, "id">;
-        // Fetch the image buffer from the API endpoint using the fileId
-        let imageBuffer;
-        fetchImageFromDrive(data.imageUrl)
-            .then((imageBuffer) => {
-              
-                return imageBuffer; 
-            })
-            .catch((error) => {
-             
-                console.error("Error fetching image:", error);
-            });
-
-        console.log(imageBuffer);
         
+        // Declare imageBuff here and wait for the fetch to complete
+        let imageBuff: string | null = null;
+        
+        try {
+          imageBuff = await fetchImageFromDrive(data.imageUrl);
+          console.log(imageBuff); // Verify imageBuff has the data
+        } catch (error) {
+          console.error("Error fetching image:", error);
+        }
+
         return {
           id: doc.id,
           title: data.title,
           location: data.location,
           description: data.description,
-          imageUrl: imageBuffer,
+          imageUrl: imageBuff,  // Now imageBuff is correctly set
           date:
             data.date instanceof Timestamp
               ? data.date.toDate().toLocaleDateString("en-US", {
@@ -75,12 +76,13 @@ export default function ManageEvents() {
                   year: "numeric",
                 }),
         };
-      });
-      setEvents(eventsList);
-    };
+      })
+    );
+    setEvents(eventsList);
+  };
 
-    fetchEvents();
-  }, []);
+  fetchEvents();
+}, []);
 
   const fetchImageFromDrive = async (fileId: string) => {
     try {
@@ -176,6 +178,7 @@ export default function ManageEvents() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {events.length > 0 ? (
                 events.map((event) => (
+
                   <ModifiableEventCard
                     key={event.id}
                     {...event}
