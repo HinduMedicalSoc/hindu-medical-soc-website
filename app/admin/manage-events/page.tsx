@@ -47,12 +47,12 @@ export default function ManageEvents() {
       querySnapshot.docs.map(async (doc) => {
         const data = doc.data() as Omit<Event, "id">;
         
-        // Declare imageBuff here and wait for the fetch to complete
+       
         let imageBuff: string | null = null;
         
         try {
           imageBuff = await fetchImageFromDrive(data.imageUrl);
-          console.log(imageBuff); // Verify imageBuff has the data
+          
         } catch (error) {
           console.error("Error fetching image:", error);
         }
