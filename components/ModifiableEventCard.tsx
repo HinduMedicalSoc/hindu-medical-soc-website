@@ -25,6 +25,8 @@ const ModifiableEventCard: React.FC<ModifiableEventCardProps> = ({
     return text.substr(0, maxLength) + "...";
   };
 
+  console.log(imageUrl);
+
   return (
     <div className='bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1'>
       <div className='relative w-full h-auto aspect-w-4 aspect-h-3'>

@@ -47,18 +47,15 @@ export default function ManageEvents() {
         fetchImageFromDrive(data.imageUrl)
             .then((imageBuffer) => {
               
-               
                 return imageBuffer; 
             })
             .catch((error) => {
              
                 console.error("Error fetching image:", error);
             });
+
+        console.log(imageBuffer);
         
-
-        
-
-
         return {
           id: doc.id,
           title: data.title,
@@ -92,7 +89,7 @@ export default function ManageEvents() {
     
       const blob = await response.blob();
       const arr_buffer = await blob.arrayBuffer();
-      console.log(arr_buffer);
+      
       return Buffer.from(arr_buffer).toString('base64');
      
       
