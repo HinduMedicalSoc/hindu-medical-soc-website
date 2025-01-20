@@ -1,3 +1,5 @@
+import { db } from "@/lib/firebase";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import React, { useState } from "react";
 
 const InquiryForm = ({ onClose }: { onClose: () => void }) => {
@@ -8,43 +10,29 @@ const InquiryForm = ({ onClose }: { onClose: () => void }) => {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
+  // handleSubmit function which will write the name email and message to firestore's contact-us collection
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Show loading state while submitting
     setLoading(true);
     setError(null);
     setSuccess(false);
 
-    // Prepare the data to send
-    const inquiryData = {
-      name,
-      email,
-      message,
-    };
-
     try {
-      // Send the data to your API
-      const response = await fetch("/api/send-inquiry", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(inquiryData),
+      const docRef = await addDoc(collection(db, "contact-us"), {
+        name,
+        email,
+        message,
+        createdAt: serverTimestamp(),
       });
-
-      if (!response.ok) {
-        throw new Error("Failed to submit inquiry");
-      }
-
-      // If successful, show success message and close the form
+      console.log("Document written with ID: ", docRef.id);
       setSuccess(true);
-      onClose();
+      setName("");
+      setEmail("");
+      setMessage("");
     } catch (error) {
-      // Handle error
-      setError(error instanceof Error ? error.message : "Something went wrong");
+      console.error("Error adding document: ", error);
+      setError("Something went wrong. Please try again.");
     } finally {
-      // Hide loading state after submission
       setLoading(false);
     }
   };

@@ -28,34 +28,43 @@ export default function AdminPage() {
 
   return (
     <AuthGuard>
-      <div className="relative min-h-screen flex flex-col p-4">
+      <div className='relative min-h-screen flex flex-col p-8 bg-gray-900'>
         {/* Title centered horizontally */}
-        <h1 className="text-4xl font-bold mb-8 text-center">
-          Welcome to the Admin Page
+        <h1 className='text-4xl font-bold mb-12 text-center text-white'>
+          Welcome to the Admin Dashboard
         </h1>
-        
+        {/* Home button */}
+        <button
+          onClick={() => router.push("/")}
+          className='w-24 px-4 py-2 bg-white text-hmsa-blue font-bold rounded hover:bg-white mb-8'>
+          Home
+        </button>
+
         {/* Links Section centered vertically */}
-        <div className="flex flex-col items-center justify-center flex-grow mb-8">
-          <a
-            href="/admin/manage-events"
-            className="text-white text-lg underline hover:text-gray-300 mb-4"
-          >
+        <div className='flex flex-col items-center justify-center flex-grow gap-6 mb-8'>
+          <button
+            onClick={() => router.push("/admin/manage-events")}
+            className='w-64 px-6 py-4 text-lg font-bold text-hmsa-blue bg-white rounded-lg 
+                     hover:bg-blue-700 transition-colors duration-200 shadow-lg
+                     hover:shadow--blue-500/25'>
             Manage Events
-          </a>
-          <a
-            href="/manage-articles"
-            className="text-white text-lg underline hover:text-gray-300"
-          >
-            Manage Articles
-          </a>
+          </button>
+          <button
+            onClick={() => router.push("/admin/manage-inquiries")}
+            className='w-64 px-6 py-4 text-lg font-bold text-hmsa-blue bg-white rounded-lg 
+                     hover:bg-blue-700 transition-colors duration-200 shadow-lg
+                     hover:shadow-blue-500/25'>
+            Manage Inquiries
+          </button>
         </div>
 
         {/* Logout Button */}
         {user && (
           <button
             onClick={handleLogout}
-            className="absolute bottom-6 right-6 px-6 py-3 text-lg font-medium text-white bg-red-500 rounded hover:bg-red-600"
-          >
+            className='absolute bottom-6 right-6 px-6 py-3 text-lg font-medium text-white 
+                     bg-red-500 rounded-lg hover:bg-red-600 transition-colors duration-200
+                     shadow-lg hover:shadow-red-500/25'>
             Logout
           </button>
         )}

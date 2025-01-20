@@ -69,7 +69,7 @@ export default function Home() {
   useEffect(() => {
     const fetchEvents = async () => {
       const eventsRef = collection(db, "events");
-      const q = query(eventsRef, orderBy("date", "asc"));
+      const q = query(eventsRef, orderBy("date", "desc"));
 
       const querySnapshot = await getDocs(q);
       const eventsList = await Promise.all(
