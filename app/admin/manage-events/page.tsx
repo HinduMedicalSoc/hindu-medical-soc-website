@@ -95,7 +95,7 @@ export default function ManageEvents() {
       return Buffer.from(arr_buffer).toString("base64");
     } catch (error) {
       console.error("Error fetching image from Drive:", error);
-      return null;
+      return "";
     }
   };
 
