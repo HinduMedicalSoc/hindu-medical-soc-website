@@ -258,11 +258,11 @@ export default function Home() {
                   height={200}
                   style={{ objectFit: "contain" }}
                 />
-                <p
+                <button
                   onClick={openModal}
-                  className='text-white text-2xl cursor-pointer hover:underline'>
+                  className="bg-white text-hmsa-blue font-bold py-2 px-6 rounded-full hover:bg-gray-200 transition duration-300">
                   Admin Login
-                </p>
+                </button>
 
                 {/* Render the AdminLoginModal and pass the modal state */}
                 <AdminLoginModal
