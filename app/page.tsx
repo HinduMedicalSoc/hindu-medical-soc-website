@@ -16,6 +16,8 @@ import {
   getDocs,
   Timestamp,
 } from "firebase/firestore";
+import InquiryForm from "../components/InquiryForm";
+
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,6 +26,7 @@ export default function Home() {
     setIsModalOpen(true);
   };
   const closeModal = () => setIsModalOpen(false);
+  const [isInquiryOpen, setIsInquiryOpen] = useState(false);
 
   // const events = [
   //   {
@@ -76,7 +79,7 @@ export default function Home() {
 
           const timestamp = data.date as unknown as Timestamp;
 
-          let imageBuff: string | null = null;
+          let imageBuff = "";
         
           try {
             imageBuff = await fetchImageFromDrive(data.imageUrl);
@@ -120,7 +123,7 @@ export default function Home() {
       
     } catch (error) {
       console.error("Error fetching image from Drive:", error);
-      return null;
+      return "";
     }
   };
 
@@ -249,6 +252,18 @@ export default function Home() {
                     Join HMSA
                   </button>
                 </a>
+
+                <button 
+                className='bg-white text-hmsa-blue font-bold py-2 px-6 rounded-full hover:bg-gray-200 transition duration-300'
+                onClick={() => setIsInquiryOpen(true)}
+                >
+                    Contact us
+                </button>
+                {isInquiryOpen && (
+                  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <InquiryForm onClose={() => setIsInquiryOpen(false)} />
+                  </div>
+        )}
               </div>
               <div className='md:w-1/3 mt-8 md:mt-0 flex flex-col items-center justify-center md:justify-end'>
                 <Image

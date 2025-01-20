@@ -48,7 +48,7 @@ export default function ManageEvents() {
         const data = doc.data() as Omit<Event, "id">;
         
        
-        let imageBuff: string | null = null;
+        let imageBuff = "";
         
         try {
           imageBuff = await fetchImageFromDrive(data.imageUrl);
@@ -97,7 +97,7 @@ export default function ManageEvents() {
       
     } catch (error) {
       console.error("Error fetching image from Drive:", error);
-      return null;
+      return "";
     }
   };
 
