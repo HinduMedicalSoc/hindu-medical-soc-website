@@ -50,7 +50,7 @@ export default function ManageEvents() {
         querySnapshot.docs.map(async (doc) => {
           const data = doc.data() as Omit<Event, "id">;
 
-          let imageBuff: string | null = null;
+          let imageBuff = "";
 
           try {
             imageBuff = await fetchImageFromDrive(data.imageUrl);
