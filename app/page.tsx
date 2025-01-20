@@ -18,7 +18,6 @@ import {
 } from "firebase/firestore";
 import InquiryForm from "../components/InquiryForm";
 
-
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => {
@@ -80,30 +79,27 @@ export default function Home() {
           const timestamp = data.date as unknown as Timestamp;
 
           let imageBuff = "";
-        
+
           try {
             imageBuff = await fetchImageFromDrive(data.imageUrl);
-            
           } catch (error) {
             console.error("Error fetching image:", error);
           }
 
-
-        
-        return {
-          id: doc.id,
-          title: data.title,
-          location: data.location,
-          description: data.description,
-          imageUrl: imageBuff,
-          date: timestamp.toDate().toLocaleDateString("en-US", {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-          }),
-        };
-      })
-    );
+          return {
+            id: doc.id,
+            title: data.title,
+            location: data.location,
+            description: data.description,
+            imageUrl: imageBuff,
+            date: timestamp.toDate().toLocaleDateString("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            }),
+          };
+        })
+      );
       setEvents(eventsList);
     };
 
@@ -113,20 +109,16 @@ export default function Home() {
   const fetchImageFromDrive = async (fileId: string) => {
     try {
       const response = await fetch(`/api/download-image?fileId=${fileId}`);
-      
-    
+
       const blob = await response.blob();
       const arr_buffer = await blob.arrayBuffer();
-      
-      return Buffer.from(arr_buffer).toString('base64');
-     
-      
+
+      return Buffer.from(arr_buffer).toString("base64");
     } catch (error) {
       console.error("Error fetching image from Drive:", error);
       return "";
     }
   };
-
 
   return (
     <div className='min-h-screen'>
@@ -247,23 +239,22 @@ export default function Home() {
                   href='https://forms.gle/W6zBeMVQzswTN1CK8'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='inline-block'>
+                  className='inline-block pr-5'>
                   <button className='bg-white text-hmsa-blue font-bold py-2 px-6 rounded-full hover:bg-gray-200 transition duration-300'>
                     Join HMSA
                   </button>
                 </a>
 
-                <button 
-                className='bg-white text-hmsa-blue font-bold py-2 px-6 rounded-full hover:bg-gray-200 transition duration-300'
-                onClick={() => setIsInquiryOpen(true)}
-                >
-                    Contact us
+                <button
+                  className='bg-white text-hmsa-blue font-bold py-2 px-6 rounded-full hover:bg-gray-200 transition duration-300'
+                  onClick={() => setIsInquiryOpen(true)}>
+                  Contact us
                 </button>
                 {isInquiryOpen && (
-                  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                  <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
                     <InquiryForm onClose={() => setIsInquiryOpen(false)} />
                   </div>
-        )}
+                )}
               </div>
               <div className='md:w-1/3 mt-8 md:mt-0 flex flex-col items-center justify-center md:justify-end'>
                 <Image
@@ -275,7 +266,7 @@ export default function Home() {
                 />
                 <button
                   onClick={openModal}
-                  className="bg-white text-hmsa-blue font-bold py-2 px-6 rounded-full hover:bg-gray-200 transition duration-300">
+                  className='bg-white text-hmsa-blue font-bold py-2 px-6 rounded-full hover:bg-gray-200 transition duration-300'>
                   Admin Login
                 </button>
 
