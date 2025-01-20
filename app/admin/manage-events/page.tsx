@@ -11,7 +11,8 @@ import {
   query,
   orderBy,
   doc,
-  updateDoc
+  updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { Timestamp } from "firebase/firestore";
@@ -36,65 +37,60 @@ export default function ManageEvents() {
   const [isLoading, setIsLoading] = useState(false);
 
   // Fetch events and format the date
- 
-    useEffect(() => {
+
+  useEffect(() => {
     const fetchEvents = async () => {
-    const eventsRef = collection(db, "events");
-    const q = query(eventsRef, orderBy("date", "asc"));
+      const eventsRef = collection(db, "events");
+      const q = query(eventsRef, orderBy("date", "asc"));
 
-    const querySnapshot = await getDocs(q);
-    const eventsList = await Promise.all(
-      querySnapshot.docs.map(async (doc) => {
-        const data = doc.data() as Omit<Event, "id">;
-        
-       
-        let imageBuff: string | null = null;
-        
-        try {
-          imageBuff = await fetchImageFromDrive(data.imageUrl);
-          
-        } catch (error) {
-          console.error("Error fetching image:", error);
-        }
+      const querySnapshot = await getDocs(q);
+      const eventsList = await Promise.all(
+        querySnapshot.docs.map(async (doc) => {
+          const data = doc.data() as Omit<Event, "id">;
 
-        return {
-          id: doc.id,
-          title: data.title,
-          location: data.location,
-          description: data.description,
-          imageUrl: imageBuff,  // Now imageBuff is correctly set
-          date:
-            data.date instanceof Timestamp
-              ? data.date.toDate().toLocaleDateString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                })
-              : new Date(data.date).toLocaleDateString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                }),
-        };
-      })
-    );
-    setEvents(eventsList);
-  };
+          let imageBuff: string | null = null;
 
-  fetchEvents();
-}, []);
+          try {
+            imageBuff = await fetchImageFromDrive(data.imageUrl);
+          } catch (error) {
+            console.error("Error fetching image:", error);
+          }
+
+          return {
+            id: doc.id,
+            title: data.title,
+            location: data.location,
+            description: data.description,
+            imageUrl: imageBuff, // Now imageBuff is correctly set
+            date:
+              data.date instanceof Timestamp
+                ? data.date.toDate().toLocaleDateString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  })
+                : new Date(data.date).toLocaleDateString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  }),
+          };
+        })
+      );
+      setEvents(eventsList);
+    };
+
+    fetchEvents();
+  }, []);
 
   const fetchImageFromDrive = async (fileId: string) => {
     try {
       const response = await fetch(`/api/download-image?fileId=${fileId}`);
-      
-    
+
       const blob = await response.blob();
       const arr_buffer = await blob.arrayBuffer();
-      
-      return Buffer.from(arr_buffer).toString('base64');
-     
-      
+
+      return Buffer.from(arr_buffer).toString("base64");
     } catch (error) {
       console.error("Error fetching image from Drive:", error);
       return null;
@@ -106,9 +102,14 @@ export default function ManageEvents() {
     setIsModalOpen(true);
   };
 
-  const handleDelete = (eventId: string) => {
-    // For now, just log. Later will integrate with DB
-    console.log("Deleting event:", eventId);
+  //handleDelete function to delete the event from firestore
+  const handleDelete = async (eventId: string) => {
+    try {
+      await deleteDoc(doc(db, "events", eventId));
+      setEvents((prev) => prev.filter((event) => event.id !== eventId));
+    } catch (error) {
+      console.error("Error deleting event:", error);
+    }
   };
 
   const handleSubmitModification = async (
@@ -170,15 +171,14 @@ export default function ManageEvents() {
 
   return (
     <AuthGuard>
-      <div className="relative min-h-screen p-4">
-        <h1 className="text-4xl font-bold mb-8 text-center">Manage Events</h1>
+      <div className='relative min-h-screen p-4'>
+        <h1 className='text-4xl font-bold mb-8 text-center'>Manage Events</h1>
 
-        <section id="events" className="py-12 bg-gray-100">
-          <div className="container mx-auto px-4 max-w-7xl">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <section id='events' className='py-12 bg-gray-100'>
+          <div className='container mx-auto px-4 max-w-7xl'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
               {events.length > 0 ? (
                 events.map((event) => (
-
                   <ModifiableEventCard
                     key={event.id}
                     {...event}
@@ -196,7 +196,7 @@ export default function ManageEvents() {
                   />
                 ))
               ) : (
-                <p className="text-black">No events found.</p>
+                <p className='text-black'>No events found.</p>
               )}
             </div>
           </div>
@@ -204,37 +204,38 @@ export default function ManageEvents() {
 
         {/* Simple Modal */}
         {isModalOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white p-6 text-black rounded-lg w-full max-w-md mx-4">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold">Modify Event</h2>
+          <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
+            <div className='bg-white p-6 text-black rounded-lg w-full max-w-md mx-4'>
+              <div className='flex justify-between items-center mb-4'>
+                <h2 className='text-xl font-bold'>Modify Event</h2>
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="text-gray-500 hover:text-gray-700"
-                >
+                  className='text-gray-500 hover:text-gray-700'>
                   ✕
                 </button>
               </div>
 
-              <form onSubmit={handleSubmitModification} className="space-y-4">
+              <form onSubmit={handleSubmitModification} className='space-y-4'>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Title</label>
+                  <label className='block text-sm font-medium mb-1'>
+                    Title
+                  </label>
                   <input
-                    type="text"
+                    type='text'
                     value={selectedEvent?.title || ""}
                     onChange={(e) =>
                       setSelectedEvent((prev) =>
                         prev ? { ...prev, title: e.target.value } : null
                       )
                     }
-                    className="w-full p-2 border rounded"
+                    className='w-full p-2 border rounded'
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">Date</label>
+                  <label className='block text-sm font-medium mb-1'>Date</label>
                   <input
-                    type="text"
+                    type='text'
                     value={
                       selectedEvent?.date instanceof Timestamp
                         ? selectedEvent.date
@@ -255,23 +256,23 @@ export default function ManageEvents() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">
+                  <label className='block text-sm font-medium mb-1'>
                     Location
                   </label>
                   <input
-                    type="text"
+                    type='text'
                     value={selectedEvent?.location || ""}
                     onChange={(e) =>
                       setSelectedEvent((prev) =>
                         prev ? { ...prev, location: e.target.value } : null
                       )
                     }
-                    className="w-full p-2 border rounded"
+                    className='w-full p-2 border rounded'
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">
+                  <label className='block text-sm font-medium mb-1'>
                     Description
                   </label>
                   <textarea
@@ -281,40 +282,38 @@ export default function ManageEvents() {
                         prev ? { ...prev, description: e.target.value } : null
                       )
                     }
-                    className="w-full p-2 border rounded"
+                    className='w-full p-2 border rounded'
                     rows={3}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">
+                  <label className='block text-sm font-medium mb-1'>
                     Upload Image
                   </label>
                   <input
-                    type="file"
-                    accept="image/*"
+                    type='file'
+                    accept='image/*'
                     onChange={(e) => {
                       const file = e.target.files?.[0];
                       if (file) {
                         setFile(file);
                       }
                     }}
-                    className="w-full p-2 border rounded"
+                    className='w-full p-2 border rounded'
                   />
                 </div>
 
-                <div className="flex justify-end space-x-2 mt-6">
+                <div className='flex justify-end space-x-2 mt-6'>
                   <button
-                    type="button"
+                    type='button'
                     onClick={() => setIsModalOpen(false)}
-                    className="px-4 py-2 text-gray-600 hover:text-gray-800"
-                  >
+                    className='px-4 py-2 text-gray-600 hover:text-gray-800'>
                     Cancel
                   </button>
                   <button
-                    type="submit"
-                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                  >
+                    type='submit'
+                    className='px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700'>
                     Save Changes
                   </button>
                 </div>
@@ -325,8 +324,7 @@ export default function ManageEvents() {
 
         <button
           onClick={handleLogout}
-          className="absolute bottom-6 right-6 px-4 py-2 bg-red-500 text-white rounded-full"
-        >
+          className='absolute bottom-6 right-6 px-4 py-2 bg-red-500 text-white rounded-full'>
           Logout
         </button>
       </div>
