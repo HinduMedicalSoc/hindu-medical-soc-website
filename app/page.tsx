@@ -70,29 +70,60 @@ export default function Home() {
       const q = query(eventsRef, orderBy("date", "asc"));
 
       const querySnapshot = await getDocs(q);
-      const eventsList = querySnapshot.docs.map((doc) => {
-        const data = doc.data() as Omit<Event, "id">;
+      const eventsList = await Promise.all(
+        querySnapshot.docs.map(async (doc) => {
+          const data = doc.data() as Omit<Event, "id">;
 
-        const timestamp = data.date as unknown as Timestamp;
+          const timestamp = data.date as unknown as Timestamp;
+
+          let imageBuff: string | null = null;
+        
+          try {
+            imageBuff = await fetchImageFromDrive(data.imageUrl);
+            
+          } catch (error) {
+            console.error("Error fetching image:", error);
+          }
+
+
         
         return {
           id: doc.id,
           title: data.title,
           location: data.location,
           description: data.description,
-          imageUrl: data.imageUrl,
+          imageUrl: imageBuff,
           date: timestamp.toDate().toLocaleDateString("en-US", {
             month: "long",
             day: "numeric",
             year: "numeric",
           }),
         };
-      });
+      })
+    );
       setEvents(eventsList);
     };
 
     fetchEvents();
   }, []);
+
+  const fetchImageFromDrive = async (fileId: string) => {
+    try {
+      const response = await fetch(`/api/download-image?fileId=${fileId}`);
+      
+    
+      const blob = await response.blob();
+      const arr_buffer = await blob.arrayBuffer();
+      
+      return Buffer.from(arr_buffer).toString('base64');
+     
+      
+    } catch (error) {
+      console.error("Error fetching image from Drive:", error);
+      return null;
+    }
+  };
+
 
   return (
     <div className='min-h-screen'>
