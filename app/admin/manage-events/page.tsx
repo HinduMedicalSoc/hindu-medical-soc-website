@@ -227,6 +227,8 @@ export default function ManageEvents() {
     setConfirmedEventId(id);
     setAreYouSure(true);
   }
+  const maxLength = 76;
+  const remainingChars = maxLength - (selectedEvent?.description?.length || 0);
   return (
     <AuthGuard>
       <div className='relative min-h-screen p-4'>
@@ -359,9 +361,17 @@ export default function ManageEvents() {
                         prev ? { ...prev, description: e.target.value } : null
                       )
                     }
+                    maxLength={maxLength}
                     className='w-full p-2 border rounded'
                     rows={3}
                   />
+                  <p
+                    className={`text-sm ${
+                      remainingChars === 0 ? "text-red-500" : "text-gray-500"
+                    }`}
+                  >
+                    {remainingChars} characters remaining
+                  </p>
                 </div>
 
                 <div>
