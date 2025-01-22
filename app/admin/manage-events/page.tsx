@@ -33,7 +33,8 @@ export default function ManageEvents() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [createEventOpen, setCreateEventOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
-  const [file, setFile] = useState<File | null>(null);
+  const [file, setFile] = useState(new File([], "@/public/hmsa.png"));
+  // const [defaultImage, setDefaultImage] = useState("/hmsa.png");
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [areYouSure, setAreYouSure] = useState(false);
@@ -107,7 +108,6 @@ export default function ManageEvents() {
 
   //handleDelete function to delete the event from firestore
   const handleDelete = async (eventId: string) => {
-    console.log("Deleting event with id:", eventId);
     if (!eventId) {
       if (process.env.NODE_ENV === "development") {
         throw new Error("No event id (handleDelete)");
@@ -279,7 +279,7 @@ export default function ManageEvents() {
           </div>
         </section>
 
-        {/* Simple Modal */}
+        {/* Event Modification Modal */}
         {isModalOpen && (
           <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
             <div className='bg-white p-6 text-black rounded-lg w-full max-w-md mx-4'>
@@ -312,7 +312,7 @@ export default function ManageEvents() {
                 <div>
                   <label className='block text-sm font-medium mb-1'>Date</label>
                   <input
-                    type='text'
+                    type='date'
                     value={
                       selectedEvent?.date instanceof Timestamp
                         ? selectedEvent.date
@@ -432,7 +432,7 @@ export default function ManageEvents() {
                 <div>
                   <label className='block text-sm font-medium mb-1'>Date</label>
                   <input
-                    type='text'
+                    type='date'
                     value={
                       selectedEvent?.date instanceof Timestamp
                         ? selectedEvent.date
@@ -449,6 +449,7 @@ export default function ManageEvents() {
                         prev ? { ...prev, date: e.target.value } : null
                       )
                     }
+                    className='w-full p-2 border rounded'
                   />
                 </div>
 

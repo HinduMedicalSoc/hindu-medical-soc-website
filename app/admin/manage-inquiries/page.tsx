@@ -69,7 +69,9 @@ export default function ManageInquiries() {
             <div key={message.id} className='bg-white p-6 rounded-lg shadow'>
               <div>
                 <span className='font-semibold text-black'>Name: </span>
-                <span className='font-bold text-lg'>{message.name}</span>
+                <span className='font-bold text-gray-600 text-lg'>
+                  {message.name}
+                </span>
               </div>
               <div>
                 <span className='font-semibold text-black'>Email: </span>
