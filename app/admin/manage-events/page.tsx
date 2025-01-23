@@ -33,7 +33,7 @@ export default function ManageEvents() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [createEventOpen, setCreateEventOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
-  const [file, setFile] = useState(new File([], "@/public/hmsa.png"));
+  const [file, setFile] = useState<File | null>(null);
   // const [defaultImage, setDefaultImage] = useState("/hmsa.png");
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -139,11 +139,14 @@ export default function ManageEvents() {
       });
 
       // Upload the image if selected and get the Google Drive file ID
+      console.log(selectedEvent.title, file);
       if (file) {
         const driveFileId = await uploadImageToDrive(file);
         await updateDoc(docRef, {
           imageUrl: driveFileId, // This is the Google Drive file ID
         });
+      } else {
+        // console.log("this should print because img was not modified");
       }
 
       console.log("Modified event:", selectedEvent);
