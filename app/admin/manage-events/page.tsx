@@ -317,14 +317,10 @@ export default function ManageEvents() {
                     type='date'
                     value={
                       selectedEvent?.date instanceof Timestamp
-                        ? selectedEvent.date
-                            .toDate()
-                            .toLocaleDateString("en-US", {
-                              month: "long",
-                              day: "numeric",
-                              year: "numeric",
-                            })
-                        : selectedEvent?.date || ""
+                        ? selectedEvent.date.toDate().toISOString().split('T')[0]
+                        : selectedEvent?.date
+                        ? new Date(selectedEvent.date).toISOString().split('T')[0]
+                        : ""
                     }
                     onChange={(e) =>
                       setSelectedEvent((prev) =>
