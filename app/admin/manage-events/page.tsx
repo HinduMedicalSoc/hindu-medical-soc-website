@@ -150,6 +150,12 @@ export default function ManageEvents() {
       }
 
       console.log("Modified event:", selectedEvent);
+      //updat events list and make sure it displays right away
+      setEvents((prev) =>
+        prev.map((event) =>
+          event.id === selectedEvent.id ? selectedEvent : event
+        )
+      );
     } catch (error) {
       console.error("Error updating event:", error);
     } finally {
@@ -230,8 +236,29 @@ export default function ManageEvents() {
     setConfirmedEventId(id);
     setAreYouSure(true);
   }
+
   const maxLength = 76;
   const remainingChars = maxLength - (selectedEvent?.description?.length || 0);
+  const [isVirtual, setIsVirtual] = useState(false);
+
+  useEffect(() => {
+    if (selectedEvent && selectedEvent.location === "Virtual") {
+      setIsVirtual(true);
+    } else {
+      setIsVirtual(false);
+    }
+  }, [selectedEvent]);
+
+  const handleVirtualToggle = (checked: boolean) => {
+    setIsVirtual(checked);
+    if (checked) {
+      setSelectedEvent((prev) =>
+        prev ? { ...prev, location: "Virtual" } : null
+      );
+    } else {
+      setSelectedEvent((prev) => (prev ? { ...prev, location: "" } : null));
+    }
+  };
   return (
     <AuthGuard>
       <div className='relative min-h-screen p-4'>
@@ -320,9 +347,14 @@ export default function ManageEvents() {
                     type='date'
                     value={
                       selectedEvent?.date instanceof Timestamp
-                        ? selectedEvent.date.toDate().toISOString().split('T')[0]
+                        ? selectedEvent.date
+                            .toDate()
+                            .toISOString()
+                            .split("T")[0]
                         : selectedEvent?.date
-                        ? new Date(selectedEvent.date).toISOString().split('T')[0]
+                        ? new Date(selectedEvent.date)
+                            .toISOString()
+                            .split("T")[0]
                         : ""
                     }
                     onChange={(e) =>
@@ -337,16 +369,36 @@ export default function ManageEvents() {
                   <label className='block text-sm font-medium mb-1'>
                     Location
                   </label>
-                  <input
-                    type='text'
-                    value={selectedEvent?.location || ""}
-                    onChange={(e) =>
-                      setSelectedEvent((prev) =>
-                        prev ? { ...prev, location: e.target.value } : null
-                      )
-                    }
-                    className='w-full p-2 border rounded'
-                  />
+                  <div className='flex items-center mb-2'>
+                    <input
+                      type='checkbox'
+                      checked={isVirtual}
+                      onChange={(e) => handleVirtualToggle(e.target.checked)}
+                      className='mr-2'
+                    />
+                    <span className='text-sm'>Virtual Event</span>
+                  </div>
+                  {!isVirtual && (
+                    <input
+                      type='text'
+                      value={selectedEvent?.location || ""}
+                      onChange={(e) =>
+                        setSelectedEvent((prev) =>
+                          prev ? { ...prev, location: e.target.value } : null
+                        )
+                      }
+                      className='w-full p-2 border rounded'
+                    />
+                  )}
+                  {isVirtual && (
+                    <input
+                      type='text'
+                      required
+                      value={"Virtual"}
+                      className='w-full p-2 border rounded'
+                      disabled
+                    />
+                  )}
                 </div>
 
                 <div>
@@ -367,8 +419,7 @@ export default function ManageEvents() {
                   <p
                     className={`text-sm ${
                       remainingChars === 0 ? "text-red-500" : "text-gray-500"
-                    }`}
-                  >
+                    }`}>
                     {remainingChars} characters remaining
                   </p>
                 </div>
@@ -438,13 +489,15 @@ export default function ManageEvents() {
                     className='w-full p-2 border rounded'
                   />
                   {selectedEvent && !selectedEvent.title && (
-                    <p className='text-red-500 text-sm mt-1'>Title is required</p>
+                    <p className='text-red-500 text-sm mt-1'>
+                      Title is required
+                    </p>
                   )}
                 </div>
 
                 <div>
                   <label className='block text-sm font-medium mb-1'>
-                    Date <span className='text-red-500'>*</span> 
+                    Date <span className='text-red-500'>*</span>
                   </label>
                   <input
                     type='date'
@@ -468,27 +521,51 @@ export default function ManageEvents() {
                     className='w-full p-2 border rounded'
                   />
                   {selectedEvent && !selectedEvent.date && (
-                    <p className='text-red-500 text-sm mt-1'>Date is required</p>
+                    <p className='text-red-500 text-sm mt-1'>
+                      Date is required
+                    </p>
                   )}
                 </div>
 
                 <div>
                   <label className='block text-sm font-medium mb-1'>
-                    Location <span className='text-red-500'>*</span> 
+                    Location <span className='text-red-500'>*</span>
                   </label>
-                  <input
-                    type='text'
-                    required
-                    value={selectedEvent?.location || ""}
-                    onChange={(e) =>
-                      setSelectedEvent((prev) =>
-                        prev ? { ...prev, location: e.target.value } : null
-                      )
-                    }
-                    className='w-full p-2 border rounded'
-                  />
+                  <div className='flex items-center mb-2'>
+                    <input
+                      type='checkbox'
+                      checked={isVirtual}
+                      onChange={(e) => handleVirtualToggle(e.target.checked)}
+                      className='mr-2'
+                    />
+                    <span className='text-sm'>Virtual Event</span>
+                  </div>
+                  {!isVirtual && (
+                    <input
+                      type='text'
+                      required
+                      value={selectedEvent?.location || ""}
+                      onChange={(e) =>
+                        setSelectedEvent((prev) =>
+                          prev ? { ...prev, location: e.target.value } : null
+                        )
+                      }
+                      className='w-full p-2 border rounded'
+                    />
+                  )}
+                  {isVirtual && (
+                    <input
+                      type='text'
+                      required
+                      value={"Virtual"}
+                      className='w-full p-2 border rounded'
+                      disabled
+                    />
+                  )}
                   {selectedEvent && !selectedEvent.location && (
-                    <p className='text-red-500 text-sm mt-1'>Location is required</p>
+                    <p className='text-red-500 text-sm mt-1'>
+                      Location is required
+                    </p>
                   )}
                 </div>
 
@@ -503,22 +580,21 @@ export default function ManageEvents() {
                         prev ? { ...prev, description: e.target.value } : null
                       );
                     }}
-                    maxLength={maxLength} 
+                    maxLength={maxLength}
                     className='w-full p-2 border rounded'
                     rows={3}
                   />
                   <p
                     className={`text-sm ${
                       remainingChars === 0 ? "text-red-500" : "text-gray-500"
-                    }`}
-                  >
+                    }`}>
                     {remainingChars} characters remaining
                   </p>
                 </div>
 
                 <div>
                   <label className='block text-sm font-medium mb-1'>
-                    Upload Image <span className='text-red-500'>*</span> 
+                    Upload Image <span className='text-red-500'>*</span>
                   </label>
                   <input
                     type='file'
@@ -533,7 +609,9 @@ export default function ManageEvents() {
                     className='w-full p-2 border rounded'
                   />
                   {selectedEvent && !file && (
-                    <p className='text-red-500 text-sm mt-1'>File is required</p>
+                    <p className='text-red-500 text-sm mt-1'>
+                      File is required
+                    </p>
                   )}
                 </div>
 
