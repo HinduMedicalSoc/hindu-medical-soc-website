@@ -425,10 +425,11 @@ export default function ManageEvents() {
               <form onSubmit={handleSubmitCreation} className='space-y-4'>
                 <div>
                   <label className='block text-sm font-medium mb-1'>
-                    Title
+                    Title <span className='text-red-500'>*</span>
                   </label>
                   <input
                     type='text'
+                    required
                     value={selectedEvent?.title || ""}
                     onChange={(e) =>
                       setSelectedEvent((prev) =>
@@ -437,12 +438,18 @@ export default function ManageEvents() {
                     }
                     className='w-full p-2 border rounded'
                   />
+                  {selectedEvent && !selectedEvent.title && (
+                    <p className='text-red-500 text-sm mt-1'>Title is required</p>
+                  )}
                 </div>
 
                 <div>
-                  <label className='block text-sm font-medium mb-1'>Date</label>
+                  <label className='block text-sm font-medium mb-1'>
+                    Date <span className='text-red-500'>*</span> 
+                  </label>
                   <input
                     type='date'
+                    required
                     value={
                       selectedEvent?.date instanceof Timestamp
                         ? selectedEvent.date
@@ -461,14 +468,18 @@ export default function ManageEvents() {
                     }
                     className='w-full p-2 border rounded'
                   />
+                  {selectedEvent && !selectedEvent.date && (
+                    <p className='text-red-500 text-sm mt-1'>Date is required</p>
+                  )}
                 </div>
 
                 <div>
                   <label className='block text-sm font-medium mb-1'>
-                    Location
+                    Location <span className='text-red-500'>*</span> 
                   </label>
                   <input
                     type='text'
+                    required
                     value={selectedEvent?.location || ""}
                     onChange={(e) =>
                       setSelectedEvent((prev) =>
@@ -477,6 +488,9 @@ export default function ManageEvents() {
                     }
                     className='w-full p-2 border rounded'
                   />
+                  {selectedEvent && !selectedEvent.location && (
+                    <p className='text-red-500 text-sm mt-1'>Location is required</p>
+                  )}
                 </div>
 
                 <div>
