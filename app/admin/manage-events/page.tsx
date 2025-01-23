@@ -515,10 +515,11 @@ export default function ManageEvents() {
 
                 <div>
                   <label className='block text-sm font-medium mb-1'>
-                    Upload Image
+                    Upload Image <span className='text-red-500'>*</span> 
                   </label>
                   <input
                     type='file'
+                    required
                     accept='image/*'
                     onChange={(e) => {
                       const file = e.target.files?.[0];
@@ -528,6 +529,9 @@ export default function ManageEvents() {
                     }}
                     className='w-full p-2 border rounded'
                   />
+                  {selectedEvent && !file && (
+                    <p className='text-red-500 text-sm mt-1'>File is required</p>
+                  )}
                 </div>
 
                 <div className='flex justify-end space-x-2 mt-6'>
