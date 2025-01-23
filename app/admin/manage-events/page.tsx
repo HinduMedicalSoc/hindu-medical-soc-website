@@ -45,7 +45,7 @@ export default function ManageEvents() {
   useEffect(() => {
     const fetchEvents = async () => {
       const eventsRef = collection(db, "events");
-      const q = query(eventsRef, orderBy("date", "asc"));
+      const q = query(eventsRef, orderBy("date", "desc"));
 
       const querySnapshot = await getDocs(q);
       const eventsList = await Promise.all(
@@ -332,6 +332,7 @@ export default function ManageEvents() {
                   <input
                     type='text'
                     value={selectedEvent?.title || ""}
+                    placeholder='Title'
                     onChange={(e) =>
                       setSelectedEvent((prev) =>
                         prev ? { ...prev, title: e.target.value } : null
@@ -382,21 +383,27 @@ export default function ManageEvents() {
                     <input
                       type='text'
                       value={selectedEvent?.location || ""}
+                      placeholder='Location'
                       onChange={(e) =>
                         setSelectedEvent((prev) =>
                           prev ? { ...prev, location: e.target.value } : null
                         )
                       }
                       className='w-full p-2 border rounded'
+                      required
                     />
+                  )}
+                  {isVirtual && (
+                    <label className='block text-sm font-medium mb--1'>
+                      RSVP Link
+                    </label>
                   )}
                   {isVirtual && (
                     <input
                       type='text'
                       required
-                      value={"Virtual"}
-                      className='w-full p-2 border rounded'
-                      disabled
+                      placeholder={"RSVP Link"}
+                      className='w-full p-2 mt-2 border rounded'
                     />
                   )}
                 </div>
@@ -407,6 +414,7 @@ export default function ManageEvents() {
                   </label>
                   <textarea
                     value={selectedEvent?.description || ""}
+                    placeholder='Enter event description with a maximum of 76 characters'
                     onChange={(e) =>
                       setSelectedEvent((prev) =>
                         prev ? { ...prev, description: e.target.value } : null
@@ -481,6 +489,7 @@ export default function ManageEvents() {
                     type='text'
                     required
                     value={selectedEvent?.title || ""}
+                    placeholder='Title'
                     onChange={(e) =>
                       setSelectedEvent((prev) =>
                         prev ? { ...prev, title: e.target.value } : null
@@ -543,23 +552,28 @@ export default function ManageEvents() {
                   {!isVirtual && (
                     <input
                       type='text'
-                      required
                       value={selectedEvent?.location || ""}
+                      placeholder='Location'
                       onChange={(e) =>
                         setSelectedEvent((prev) =>
                           prev ? { ...prev, location: e.target.value } : null
                         )
                       }
                       className='w-full p-2 border rounded'
+                      required
                     />
+                  )}
+                  {isVirtual && (
+                    <label className='block text-sm font-medium mb--1'>
+                      RSVP Link
+                    </label>
                   )}
                   {isVirtual && (
                     <input
                       type='text'
                       required
-                      value={"Virtual"}
-                      className='w-full p-2 border rounded'
-                      disabled
+                      placeholder={"RSVP Link"}
+                      className='w-full p-2 mt-2 border rounded'
                     />
                   )}
                   {selectedEvent && !selectedEvent.location && (
@@ -575,6 +589,7 @@ export default function ManageEvents() {
                   </label>
                   <textarea
                     value={selectedEvent?.description || ""}
+                    placeholder='Enter event description with a maximum of 76 characters'
                     onChange={(e) => {
                       setSelectedEvent((prev) =>
                         prev ? { ...prev, description: e.target.value } : null
