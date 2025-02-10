@@ -1,12 +1,11 @@
 import React from "react";
-import Image from "next/image";
 
 interface EventCardProps {
   title: string;
   date: string;
   location: string;
   description: string;
-  imageUrl: string;
+  imageUrl: string; // Accept the image as a buffer (base64 or binary)
 }
 
 const EventCard: React.FC<EventCardProps> = ({
@@ -22,15 +21,14 @@ const EventCard: React.FC<EventCardProps> = ({
     return text.substr(0, maxLength) + "...";
   };
 
+
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
       <div className="relative w-full h-auto aspect-w-4 aspect-h-3">
-        <Image
-          src={imageUrl}
+        <img
+          src={`data:image/jpeg;base64,${imageUrl}`} // Display image using the buffer data
           alt={title}
-          fill
-          style={{ objectFit: "cover" }}
-          className="transition-transform duration-300 hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
         />
       </div>
       <div className="p-4">

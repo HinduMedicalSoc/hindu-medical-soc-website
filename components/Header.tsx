@@ -40,7 +40,9 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    setActiveSection(pathname.slice(1) || "home");
+    if(pathname){
+      setActiveSection(pathname.slice(1) || "home");
+    }
   }, [pathname]);
 
   const navItems = [
