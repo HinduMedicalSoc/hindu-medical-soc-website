@@ -17,6 +17,7 @@ import {
   Timestamp,
 } from "firebase/firestore";
 import InquiryForm from "../components/InquiryForm";
+import ConfRegistration from "../components/ConfRegistrationForm";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,6 +27,7 @@ export default function Home() {
   };
   const closeModal = () => setIsModalOpen(false);
   const [isInquiryOpen, setIsInquiryOpen] = useState(false);
+  const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
 
   // const events = [
   //   {
@@ -235,26 +237,43 @@ export default function Home() {
                   contribute to our mission of integrating Hindu principles with
                   modern medicine.
                 </p>
-                <a
-                  href='https://forms.gle/W6zBeMVQzswTN1CK8'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='inline-block pr-5'>
-                  <button className='bg-white text-hmsa-blue font-bold py-2 px-6 rounded-full hover:bg-gray-200 transition duration-300'>
-                    Join HMSA
+
+                <div className="flex flex-wrap gap-4 mb-4">
+                  <a
+                    href='https://forms.gle/W6zBeMVQzswTN1CK8'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='inline-block pr-5'>
+                    <button className='bg-white text-hmsa-blue font-bold py-2 px-6 rounded-full hover:bg-gray-200 transition duration-300'>
+                      Join HMSA
+                    </button>
+                  </a>
+
+                  <button
+                    className='bg-white text-hmsa-blue font-bold py-2 px-6 rounded-full hover:bg-gray-200 transition duration-300'
+                    onClick={() => setIsInquiryOpen(true)}>
+                    Contact us
                   </button>
-                </a>
+                  {isInquiryOpen && (
+                    <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
+                      <InquiryForm onClose={() => setIsInquiryOpen(false)} />
+                    </div>
+                  )}
+                </div>
 
                 <button
                   className='bg-white text-hmsa-blue font-bold py-2 px-6 rounded-full hover:bg-gray-200 transition duration-300'
-                  onClick={() => setIsInquiryOpen(true)}>
-                  Contact us
+                  onClick={() => setIsRegistrationOpen(true)}>
+                  Register for Conference
                 </button>
-                {isInquiryOpen && (
-                  <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50'>
-                    <InquiryForm onClose={() => setIsInquiryOpen(false)} />
+                isRegistrationOpen && (
+                  <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 overflow-y-auto p-4'>
+                    <div className="bg-white rounded-lg shadow-lg max-w-3xl mx-auto w-full overflow-y-auto max-h-screen">
+                      <ConfRegistration onClose={() => setIsRegistrationOpen(false)} />
+                    </div>
                   </div>
-                )}
+                )
+    
               </div>
               <div className='md:w-1/3 mt-8 md:mt-0 flex flex-col items-center justify-center md:justify-end'>
                 <Image
