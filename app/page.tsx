@@ -126,7 +126,7 @@ export default function Home() {
       <Header />
       <main>
         <section
-          id='conf-title'
+          id='conf'
           className="bg-[#be9448] bg-cover bg-center min-h-screen flex flex-col items-center justify-start text-white px-4 py-8">
           <div className='container mx-auto flex flex-col lg:flex-row items-center justify-start gap-2'>
             <div className='w-full lg:w-1/2 flex items-start justify-start h-full pt-16 lg:pt-24'>
