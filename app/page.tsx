@@ -126,6 +126,44 @@ export default function Home() {
       <Header />
       <main>
         <section
+          id='conf-title'
+          className="bg-[#be9448] bg-cover bg-center min-h-screen flex flex-col items-center justify-start text-white px-4 py-8">
+          <div className='container mx-auto flex flex-col lg:flex-row items-center justify-start gap-2'>
+            <div className='w-full lg:w-1/2 flex items-start justify-start h-full pt-16 lg:pt-24'>
+              <div className='relative w-64 h-64 xs:w-80 xs:h-80 sm:w-96 sm:h-96 lg:w-[570px] lg:h-[570px] mt-16'>
+                <Image
+                  src='/steth21.png'
+                  alt='Conf Logo'
+                  fill
+                  style={{ objectFit: "contain" }}
+                  className='rounded-lg'
+                />
+              </div>
+            </div>
+            <div className='w-full lg:w-1/2 text-center lg:ml-[-2rem]'> {/* Changed to text-center */}
+              <div className="pr-4 lg:pr-12" style={{ marginLeft: '-10rem' }}>
+                <h2 className='text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 text-[#00192f]'>
+                  HMSA National Conference
+                </h2>
+                <h3 className='text-lg xs:text-xl sm:text-2xl lg:text-3xl font-semibold mb-2 text-[#00192f]'>
+                  July 12–13th, 2025
+                </h3>
+                <h3 className='text-lg xs:text-xl sm:text-2xl lg:text-3xl font-semibold mb-2 text-[#00192f]'>
+                  AUM Ashram, San Antonio TX
+                </h3>
+                <p className='text-base xs:text-lg sm:text-xl mb-8 max-w-md mx-auto text-[#00192f]'> {/* Centered paragraph */}
+                  <strong>Networking, Research, Mentorship, and a Dharmic Approach to Healthcare</strong>
+                </p>
+                <button
+                  className='bg-white text-hmsa-blue font-bold py-2 px-6 rounded-full hover:bg-gray-200 transition duration-300'
+                  onClick={() => {}}>
+                  Register
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section
           id='home'
           className='min-h-screen flex flex-col items-center justify-center text-white px-4 py-8'>
           <div className='container mx-auto flex flex-col lg:flex-row items-center justify-between gap-8'>
