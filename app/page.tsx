@@ -168,6 +168,7 @@ export default function Home() {
           </div>
         </section>
         <section
+          id='journal'
           className="bg-[#548fcc] bg-cover bg-center min-h-screen flex flex-col items-center justify-start text-white px-4 py-8">
           <div className='container mx-auto flex flex-col lg:flex-row-reverse items-center justify-start gap-2'>
             {/* Image on right now */}
