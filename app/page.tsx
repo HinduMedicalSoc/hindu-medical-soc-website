@@ -140,17 +140,20 @@ export default function Home() {
                 />
               </div>
             </div>
-            <div className='w-full lg:w-1/2 text-center lg:ml-[-2rem] mt-20'> {/* Changed to text-center */}
+            <div className='w-full lg:w-1/2 text-center mt-20 lg:ml-[-2rem]'> {/* Changed to text-center */}
               <div className="pr-4 lg:pr-12" style={{ marginLeft: '-10rem' }}>
                 <h2 className='text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 text-[#00192f]'>
-                  HMSA National Conference
+                  Svasthya
                 </h2>
-                <h3 className='text-lg xs:text-xl sm:text-2xl lg:text-3xl font-semibold mb-2 text-[#00192f]'>
+                <h3 className='text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 text-[#00192f]'>
+                  HMSA National Conference
+                </h3>
+                <h4 className='text-lg xs:text-xl sm:text-2xl lg:text-3xl font-semibold mb-2 text-[#00192f]'>
                   July 12–13th, 2025
-                </h3>
-                <h3 className='text-lg xs:text-xl sm:text-2xl lg:text-3xl font-semibold mb-2 text-[#00192f]'>
+                </h4>
+                <h4 className='text-lg xs:text-xl sm:text-2xl lg:text-3xl font-semibold mb-2 text-[#00192f]'>
                   AUM Ashram, San Antonio TX
-                </h3>
+                </h4>
                 <p className='text-base xs:text-lg sm:text-xl mb-8 max-w-md mx-auto text-[#00192f]'> {/* Centered paragraph */}
                   <strong>Networking, Research, Mentorship and Seva <br />
                     A Dharmic Approach to Healthcare</strong>
@@ -160,6 +163,46 @@ export default function Home() {
                   onClick={() => {}}>
                   Register
                 </button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section
+          className="bg-[#548fcc] bg-cover bg-center min-h-screen flex flex-col items-center justify-start text-white px-4 py-8">
+          <div className='container mx-auto flex flex-col lg:flex-row-reverse items-center justify-start gap-2'>
+            {/* Image on right now */}
+            <div className='w-full lg:w-1/2 flex items-start justify-start h-full pt-16 lg:pt-24'>
+              <div className='relative w-40 h-52 xs:w-80 xs:h-80 sm:w-64 sm:h-64 lg:w-[450px] lg:h-[450px] mt-16 ml-20'>
+                <Image
+                  src='/book2.png'
+                  alt='Journal Logo'
+                  fill
+                  style={{ objectFit: "contain" }}
+                  className='rounded-lg'
+                />
+              </div>
+            </div>
+
+            {/* Text content on left */}
+            <div className='w-full lg:w-1/2 text-center mt-20 lg:mr-[-2rem]'>
+              <div className="pr-4 lg:pr-12" style={{ marginRight: '-10rem' }}>
+                <h2 className='text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 text-[#00192f]'>
+                  Svasthya Journal
+                </h2>
+                <h3 className='text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 text-[#00192f]'>
+                  Viewing Medicine From a Dharmic Lens
+                </h3>
+                <h4 className='text-lg xs:text-xl sm:text-2xl lg:text-3xl font-semibold mb-2 text-[#00192f]'>
+                  Add your submission before May 31st! 
+                </h4>
+                <a
+                  className='inline-block mt-2 bg-[#00192f] text-white font-bold py-2 px-6 rounded-full hover:bg-[#20394f] transition duration-300'
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSciHFnECoF29AUQBEsHC_RWcCVlYCJsnKm7GPUwTWBD_WqRsA/viewform"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Add
+                </a>
               </div>
             </div>
           </div>
