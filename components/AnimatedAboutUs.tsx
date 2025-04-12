@@ -57,7 +57,7 @@ const AboutUs: React.FC = () => {
     <>
       <AnimatedSection>
         <h2 className="text-5xl font-bold mb-6 text-left text-[#00192F]">
-          About Us 🩺
+          About Us
         </h2>
       </AnimatedSection>
       <AnimatedSection delay={100}>
