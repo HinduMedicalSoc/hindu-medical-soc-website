@@ -23,7 +23,7 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "about", "events", "join"];
+      const sections = ["conf", "journal", "home", "about", "events", "join"];
       const currentSection = sections.find((section) => {
         const element = document.getElementById(section);
         if (element) {
@@ -41,11 +41,13 @@ export default function Header() {
 
   useEffect(() => {
     if(pathname){
-      setActiveSection(pathname.slice(1) || "home");
+      setActiveSection(pathname.slice(1) || "conf");
     }
   }, [pathname]);
 
   const navItems = [
+    { name: "Conference", href: "#conf" },
+    { name: "Journal", href: "#journal" },
     { name: "Home", href: "#home" },
     { name: "About Us", href: "#about" },
     { name: "Events", href: "#events" },
