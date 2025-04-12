@@ -173,7 +173,7 @@ export default function Home() {
           <div className='container mx-auto flex flex-col lg:flex-row-reverse items-center justify-center gap-6 min-h-screen'>
             {/* Image on right now */}
             <div className='w-full lg:w-1/2 flex items-start justify-start h-full pt-16 lg:pt-24'>
-            <div className='relative w-64 h-80 xs:w-[900px] xs:h-[900px] sm:w-[900px] sm:h-[900px] lg:w-[900px] lg:h-[900px] mt-16 ml-20'>
+            <div className='relative w-64 h-80 xs:w-[450px] xs:h-[450px] sm:w-[500px] sm:h-[500px] lg:w-[550px] lg:h-[550px] mt-4 ml-20'>
                 <Image
                   src='/book2.png'
                   alt='Journal Logo'
@@ -245,39 +245,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className='mt-6 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4'>
-            <a
-              href='https://docs.google.com/forms/d/e/1FAIpQLSe7j8RxBEfCMUbCSIXedomNt7c0M3B3vNZtNGApyEqiS8eP_g/viewform?usp=sf_link'
-              target='_blank'
-              rel='noopener noreferrer'
-              className='inline-block w-full sm:w-auto'>
-              <button className='w-full bg-gray-200 bg-opacity-90 text-gray-700 hover:text-gray-900 font-bold py-3 sm:py-4 px-8 sm:px-12 rounded-full hover:bg-gray-100 transform hover:scale-105 transition duration-300 ease-in-out shadow-lg text-xl sm:text-2xl'>
-                Get Involved 🩺
-              </button>
-            </a>
-            <a
-              href='https://www.instagram.com/hindumedicalsoc/?igsh=MWoya3E5aG5icHR5OQ%3D%3D'
-              target='_blank'
-              rel='noopener noreferrer'
-              className='w-full sm:w-auto bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-3 sm:py-4 px-6 rounded-full hover:from-purple-600 hover:to-pink-600 transform hover:scale-105 transition duration-300 ease-in-out shadow-lg flex items-center justify-center text-xl sm:text-2xl'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='24'
-                height='24'
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth='2'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                className='mr-2 sm:w-9 sm:h-9'>
-                <rect x='2' y='2' width='20' height='20' rx='5' ry='5'></rect>
-                <path d='M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z'></path>
-                <line x1='17.5' y1='6.5' x2='17.51' y2='6.5'></line>
-              </svg>
-              @hindumedicalsoc
-            </a>
-          </div>
+          
         </section>
 
         <section id='about' className='py-8 bg-gray-100'>
@@ -289,7 +257,7 @@ export default function Home() {
         <section id='events' className='py-12 bg-gray-100'>
           <div className='container mx-auto px-4 max-w-7xl'>
             <h2 className='text-4xl xs:text-5xl lg:text-6xl font-bold mb-8 sm:mb-12 text-left text-hmsa-blue'>
-              Events 🗓️
+              Events
             </h2>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
               {events.map((event) => (
