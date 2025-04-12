@@ -170,10 +170,10 @@ export default function Home() {
         <section
           id='journal'
           className="bg-[#548fcc] bg-cover bg-center min-h-screen flex flex-col items-center justify-start text-white px-4 py-8">
-          <div className='container mx-auto flex flex-col lg:flex-row-reverse items-center justify-start gap-2'>
+          <div className='container mx-auto flex flex-col lg:flex-row-reverse items-center justify-center gap-6 min-h-screen'>
             {/* Image on right now */}
             <div className='w-full lg:w-1/2 flex items-start justify-start h-full pt-16 lg:pt-24'>
-              <div className='relative w-40 h-52 xs:w-80 xs:h-80 sm:w-64 sm:h-64 lg:w-[450px] lg:h-[450px] mt-16 ml-20'>
+            <div className='relative w-64 h-80 xs:w-[900px] xs:h-[900px] sm:w-[900px] sm:h-[900px] lg:w-[900px] lg:h-[900px] mt-16 ml-20'>
                 <Image
                   src='/book2.png'
                   alt='Journal Logo'
@@ -185,7 +185,7 @@ export default function Home() {
             </div>
 
             {/* Text content on left */}
-            <div className='w-full lg:w-1/2 text-center mt-20 lg:mr-[-2rem]'>
+            <div className='w-full lg:w-1/2 text-center lg:mr-[-2rem] mt-20'>
               <div className="pr-4 lg:pr-12" style={{ marginRight: '-10rem' }}>
                 <h2 className='text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 text-[#00192f]'>
                   Svasthya Journal
