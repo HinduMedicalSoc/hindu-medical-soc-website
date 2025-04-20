@@ -17,6 +17,7 @@ import {
   Timestamp,
 } from "firebase/firestore";
 import InquiryForm from "../components/InquiryForm";
+import Link from 'next/link';
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -158,13 +159,11 @@ export default function Home() {
                   <strong>Networking, Research, Mentorship and Seva <br />
                     A Dharmic Approach to Healthcare</strong>
                 </p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSducySEnypxcisfVi-JWPdETPYBCOmJUx8uYXbYe2a-W9I4_Q/viewform?usp=header" target="_blank" rel="noopener noreferrer">
-                  <button
-                    className='mt-4 bg-white text-hmsa-blue font-bold py-2 px-6 rounded-full hover:bg-gray-200 transition duration-300'
-                    onClick={() => {}}>
+                <Link href="/register">
+                  <button className='mt-4 bg-white text-hmsa-blue font-bold py-2 px-6 rounded-full hover:bg-gray-200 transition duration-300'>
                     Register
                   </button>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
