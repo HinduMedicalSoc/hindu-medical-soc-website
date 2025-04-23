@@ -145,29 +145,29 @@ export default function Home() {
           </div>
           
           {/* Text Content Section */}
-          <div className='w-full lg:w-2/5 flex flex-col items-center lg:items-start'>
-            <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 text-[#00192f]'>
-              Svasthya
-            </h2>
-            <h3 className='text-xl sm:text-2xl lg:text-3xl font-bold mb-2 text-[#00192f]'>
-              HMSA National Conference
-            </h3>
-            <h4 className='text-lg sm:text-xl lg:text-2xl font-semibold mb-2 text-[#00192f]'>
-              July 12–13th, 2025
-            </h4>
-            <h4 className='text-lg sm:text-xl lg:text-2xl font-semibold mb-2 text-[#00192f]'>
-              AUM Ashram, San Antonio TX
-            </h4>
-            <p className='text-base sm:text-lg mb-8 text-[#00192f] text-center lg:text-left'>
-              <strong>Networking, Research, Mentorship and Seva <br />
-                A Dharmic Approach to Healthcare</strong>
-            </p>
-            <Link href="/register">
-              <button className='mt-4 bg-white text-hmsa-blue font-bold py-2 px-6 rounded-full hover:bg-gray-200 transition duration-300'>
-                Register
-              </button>
-            </Link>
-          </div>
+        <div className='w-full lg:w-2/5 flex flex-col items-center'>
+          <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 text-[#00192f] text-center w-full'>
+            Svasthya
+          </h2>
+          <h3 className='text-xl sm:text-2xl lg:text-3xl font-bold mb-2 text-[#00192f] text-center w-full'>
+            HMSA National Conference
+          </h3>
+          <h4 className='text-lg sm:text-xl lg:text-2xl font-semibold mb-2 text-[#00192f] text-center w-full'>
+            July 12–13th, 2025
+          </h4>
+          <h4 className='text-lg sm:text-xl lg:text-2xl font-semibold mb-2 text-[#00192f] text-center w-full'>
+            AUM Ashram, San Antonio TX
+          </h4>
+          <p className='text-base sm:text-lg mb-8 text-[#00192f] text-center w-full'>
+            <strong>Networking, Research, Mentorship and Seva <br />
+              A Dharmic Approach to Healthcare</strong>
+          </p>
+          <Link href="/register">
+            <button className='mt-4 bg-white text-hmsa-blue font-bold py-2 px-6 rounded-full hover:bg-gray-200 transition duration-300'>
+              Register
+            </button>
+          </Link>
+      </div>
         </div>
       </section>
       <section
@@ -189,25 +189,25 @@ export default function Home() {
           </div>
           
           {/* Text Content Section (Left on desktop) */}
-          <div className='w-full lg:w-2/5 flex flex-col items-center lg:items-start'>
-            <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 text-[#00192f]'>
-              Svasthya Journal
-            </h2>
-            <h3 className='text-xl sm:text-2xl lg:text-3xl font-bold mb-2 text-[#00192f]'>
-              Viewing Medicine From a Dharmic Lens
-            </h3>
-            <h4 className='text-lg sm:text-xl lg:text-2xl font-semibold mb-6 text-[#00192f]'>
-              Add your submission before May 31st!
-            </h4>
-            <a
-              className='inline-block mt-2 bg-[#00192f] text-white font-bold py-2 px-6 rounded-full hover:bg-[#20394f] transition duration-300'
-              href="https://docs.google.com/forms/d/e/1FAIpQLSciHFnECoF29AUQBEsHC_RWcCVlYCJsnKm7GPUwTWBD_WqRsA/viewform"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Add
-            </a>
-          </div>
+        <div className='w-full lg:w-2/5 flex flex-col items-center'>
+          <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 text-[#00192f] text-center w-full'>
+            Svasthya Journal
+          </h2>
+          <h3 className='text-xl sm:text-2xl lg:text-3xl font-bold mb-2 text-[#00192f] text-center w-full'>
+            Viewing Medicine From a Dharmic Lens
+          </h3>
+          <h4 className='text-lg sm:text-xl lg:text-2xl font-semibold mb-6 text-[#00192f] text-center w-full'>
+            Add your submission before May 31st!
+          </h4>
+          <a
+            className='inline-block mt-2 bg-[#00192f] text-white font-bold py-2 px-6 rounded-full hover:bg-[#20394f] transition duration-300'
+            href="https://docs.google.com/forms/d/e/1FAIpQLSciHFnECoF29AUQBEsHC_RWcCVlYCJsnKm7GPUwTWBD_WqRsA/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Add
+          </a>
+        </div>
         </div>
       </section>
         <section
