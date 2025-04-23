@@ -1,6 +1,32 @@
 'use client';
 
 import React, { useState } from 'react';
+import StripePayment from '@/components/StripePayment';
+
+// Define types for our payment flow
+interface PaymentStatus {
+  status: string;
+  transactionId: string;
+}
+
+interface PaymentResult {
+  payment_status: string;
+  transaction_id: string;
+  [key: string]: any; // For any other fields returned
+}
+
+interface FormErrors {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  phone?: string;
+  isStudent?: string;
+  affiliation?: string;
+  cityState?: string;
+  [key: string]: string | undefined;
+}
+
+
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -12,10 +38,14 @@ export default function RegisterPage() {
     affiliation: '',
     cityState: ''
   });
-  
-  const [errors, setErrors] = useState({});
 
-  const handleChange = (e) => {
+  const studentPrice = 50; //price in cents
+  const nonStudentPrice = 100; //price in cents
+
+  
+  const [errors, setErrors] = useState<FormErrors>({});
+
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -32,11 +62,11 @@ export default function RegisterPage() {
   };
 
   const validateForm = () => {
-    const newErrors = {};
+    const newErrors: FormErrors = {};
     
     // Check each field for emptiness
     Object.keys(formData).forEach(field => {
-      if (!formData[field].trim()) {
+      if (!formData[field as keyof typeof formData].trim()) {
         newErrors[field] = 'This field is required';
       }
     });
@@ -55,7 +85,15 @@ export default function RegisterPage() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
+  
+
+
+  const [clientSecret, setClientSecret] = useState(null);
+  const [showPayment, setShowPayment] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [paymentStatus, setPaymentStatus] = useState<PaymentStatus | null>(null);
+
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     
     // Validate form before submission
@@ -63,46 +101,95 @@ export default function RegisterPage() {
       return;
     }
 
-    const formBody = new URLSearchParams();
-    formBody.append('entry.924934748', formData.firstName);  // First Name
-    formBody.append('entry.1912724324', formData.lastName);  // Last Name
-    formBody.append('entry.1518749685', formData.email);  // Email
-    formBody.append('entry.36522193', formData.phone);  // Phone Number
-    formBody.append('entry.757408178', formData.isStudent);  // Are you a student?
-    formBody.append('entry.813638862', formData.affiliation);  // Affiliation
-    formBody.append('entry.272697809', formData.cityState);  // City/State
-
     try {
-      const response = await fetch(
-        'https://docs.google.com/forms/d/e/1FAIpQLSd5SUUCSsosYhsO5cCWsQPToe3lIybEK6uKNCnuGWAzE3AHGA/formResponse',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: formBody.toString(),
-          mode: 'no-cors',
-        }
-      );
+      // 1. Create payment intent data
+      const paymentIntentData = {
+        amount: formData.isStudent === 'Yes' ? studentPrice : nonStudentPrice,
+        email: formData.email
+      };
 
-      // Note: With mode: 'no-cors', response status is always 0
-      // so we can't really check response.ok
-      alert('Form submitted successfully!');
-      setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        isStudent: '',
-        affiliation: '',
-        cityState: ''
+      // 2. Create payment intent using our local API
+      const paymentIntentResponse = await fetch('/api/create-payment-intent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(paymentIntentData)
       });
-      setErrors({});
+
+      const paymentIntentResult = await paymentIntentResponse.json();
+      
+      if (paymentIntentResponse.ok && paymentIntentResult.clientSecret) {
+        // Store the client secret and show payment modal
+        setClientSecret(paymentIntentResult.clientSecret);
+        setFormSubmitted(true);
+        setShowPayment(true);
+      } else {
+        throw new Error('Failed to initialize payment');
+      }
     } catch (error) {
       console.error('Error:', error);
-      alert('There was an error submitting the form.');
+      alert('There was an error processing your request. Please try again.');
     }
   };
+  
+  // Handle payment completion
+  const handlePaymentComplete = async (result: PaymentResult) => {
+    // Set payment status for display
+    setPaymentStatus({
+      status: result.payment_status,
+      transactionId: result.transaction_id
+    });
+    
+    // Hide payment modal
+    setShowPayment(false);
+    
+    // Only submit form data to Google Forms if payment was successful
+    if (result.payment_status === 'succeeded') {
+      try {
+        // Submit the form data to Google Forms after successful payment
+        const formBody = new URLSearchParams();
+        formBody.append('entry.924934748', formData.firstName);
+        formBody.append('entry.1912724324', formData.lastName);
+        formBody.append('entry.1518749685', formData.email);
+        formBody.append('entry.36522193', formData.phone);
+        formBody.append('entry.757408178', formData.isStudent);
+        formBody.append('entry.813638862', formData.affiliation);
+        formBody.append('entry.272697809', formData.cityState);
+        // You could add the transaction ID to a custom field if needed
+        
+        await fetch(
+          'https://docs.google.com/forms/d/e/1FAIpQLSd5SUUCSsosYhsO5cCWsQPToe3lIybEK6uKNCnuGWAzE3AHGA/formResponse',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: formBody.toString(),
+            mode: 'no-cors',
+          }
+        );
+        
+        // Reset form only after successful submission
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          isStudent: '',
+          affiliation: '',
+          cityState: ''
+        });
+        setErrors({});
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        // Even if form submission fails, we still show payment success
+        // Could add specific error handling here
+      }
+    }
+  };
+
+  const price = formData.isStudent === 'Yes' ? studentPrice : nonStudentPrice;
 
   return (
     <main className="min-h-screen bg-[#be9448] px-4 py-10 text-white">
@@ -276,6 +363,28 @@ export default function RegisterPage() {
             Submit
           </button>
         </form>
+        {/* Payment status messages */}
+        {paymentStatus && (
+          <div className={`mt-6 p-4 rounded ${paymentStatus.status === 'succeeded' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+            <h3 className="font-bold text-lg">
+              {paymentStatus.status === 'succeeded' ? 'Payment Successful!' : 'Payment Failed'}
+            </h3>
+            <p>
+              {paymentStatus.status === 'succeeded' 
+                ? `Thank you for registering for the Svasthya conference. Your transaction ID is: ${paymentStatus.transactionId}` 
+                : 'There was an issue with your payment. Please try again or contact us for assistance.'}
+            </p>
+          </div>
+        )}
+        
+        {/* Stripe Payment Component */}
+        <StripePayment 
+          amount={price} 
+          email={formData.email}
+          clientSecret={clientSecret}
+          showPayment={showPayment}
+          onPaymentComplete={handlePaymentComplete}
+        />
       </div>
     </main>
   );
