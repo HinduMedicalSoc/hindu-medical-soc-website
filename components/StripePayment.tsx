@@ -13,7 +13,7 @@ interface StripePaymentProps {
   showPayment: boolean;
 }
 
-function PaymentForm({ clientSecret, email, onPaymentComplete }: { clientSecret: string, email: string, onPaymentComplete?: (result: any) => void }) {
+function PaymentForm({ clientSecret, email, onPaymentComplete, amount }: { clientSecret: string, email: string, onPaymentComplete?: (result: any) => void, amount: number }) {
   const stripe = useStripe();
   const elements = useElements();
   const [isProcessing, setIsProcessing] = useState(false);
@@ -102,7 +102,11 @@ function PaymentForm({ clientSecret, email, onPaymentComplete }: { clientSecret:
 
   return (
     <form onSubmit={handleSubmitPayment} className="p-2 mb-4">
-     <h2 className="text-xl font-bold mb-4">Complete Your Payment</h2>
+     {/* <h2 className="text-xl font-bold mb-4">Complete Your Payment</h2> */}
+     {/* Show amount */}
+     <div className="mb-2 text-lg font-semibold text-center text-hmsa-blue">
+        Amount: {(amount / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+      </div>
       
       <div className="mb-4">
         <LinkAuthenticationElement 
@@ -186,6 +190,7 @@ export default function StripePayment({ amount, email, isManual = "no", clientSe
               clientSecret={clientSecret}
               email={email} 
               onPaymentComplete={onPaymentComplete}
+              amount={amount}
             />
           </Elements>
         </div>
