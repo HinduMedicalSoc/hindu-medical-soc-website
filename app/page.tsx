@@ -126,89 +126,90 @@ export default function Home() {
       <SmoothScroll />
       <Header />
       <main>
-        <section
-          id='conf'
-          className="bg-[#be9448] bg-cover bg-center min-h-screen flex flex-col items-center justify-start text-white px-4 py-8">
-          <div className='container mx-auto flex flex-col lg:flex-row items-center justify-start gap-2'>
-            <div className='w-full lg:w-1/2 flex items-start justify-start h-full pt-16 lg:pt-24'>
-              <div className='relative w-40 h-52 xs:w-80 xs:h-80 sm:w-64 sm:h-64 lg:w-[450px] lg:h-[450px] mt-16 ml-20'>
-                <Image
-                  src='/conf2.png'
-                  alt='Conf Logo'
-                  fill
-                  style={{ objectFit: "contain" }}
-                  className='rounded-lg'
-                />
-              </div>
-            </div>
-            <div className='w-full lg:w-1/2 text-center mt-20 lg:ml-[-2rem]'> {/* Changed to text-center */}
-              <div className="pr-4 lg:pr-12" style={{ marginLeft: '-10rem' }}>
-                <h2 className='text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 text-[#00192f]'>
-                  Svasthya
-                </h2>
-                <h3 className='text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 text-[#00192f]'>
-                  HMSA National Conference
-                </h3>
-                <h4 className='text-lg xs:text-xl sm:text-2xl lg:text-3xl font-semibold mb-2 text-[#00192f]'>
-                  July 12–13th, 2025
-                </h4>
-                <h4 className='text-lg xs:text-xl sm:text-2xl lg:text-3xl font-semibold mb-2 text-[#00192f]'>
-                  AUM Ashram, San Antonio TX
-                </h4>
-                <p className='text-base xs:text-lg sm:text-xl mb-8 max-w-md mx-auto text-[#00192f]'> {/* Centered paragraph */}
-                  <strong>Networking, Research, Mentorship and Seva <br />
-                    A Dharmic Approach to Healthcare</strong>
-                </p>
-                <Link href="/register">
-                  <button className='mt-4 bg-white text-hmsa-blue font-bold py-2 px-6 rounded-full hover:bg-gray-200 transition duration-300'>
-                    Register
-                  </button>
-                </Link>
-              </div>
+      <section
+        id='conf'
+        className="bg-[#be9448] bg-cover bg-center min-h-screen flex items-center justify-center text-white px-4 py-12"
+      >
+        <div className='container mx-auto flex flex-col lg:flex-row items-center justify-center gap-8'>
+          {/* Logo Section */}
+          <div className='w-full lg:w-2/5 flex justify-center items-center'>
+            <div className='relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96'>
+              <Image
+                src='/conf2.png'
+                alt='Conf Logo'
+                fill
+                style={{ objectFit: "contain" }}
+                className='rounded-lg'
+              />
             </div>
           </div>
-        </section>
-        <section
-          id='journal'
-          className="bg-[#548fcc] bg-cover bg-center min-h-screen flex flex-col items-center justify-start text-white px-4 py-8">
-          <div className='container mx-auto flex flex-col lg:flex-row-reverse items-center justify-center gap-6 min-h-screen'>
-            {/* Image on right now */}
-            <div className='w-full lg:w-1/2 flex items-start justify-start h-full pt-16 lg:pt-24'>
-            <div className='relative w-64 h-80 xs:w-[450px] xs:h-[450px] sm:w-[500px] sm:h-[500px] lg:w-[550px] lg:h-[550px] mt-4 ml-20'>
-                <Image
-                  src='/book2.png'
-                  alt='Journal Logo'
-                  fill
-                  style={{ objectFit: "contain" }}
-                  className='rounded-lg'
-                />
-              </div>
-            </div>
-
-            {/* Text content on left */}
-            <div className='w-full lg:w-1/2 text-center lg:mr-[-2rem] mt-20'>
-              <div className="pr-4 lg:pr-12" style={{ marginRight: '-10rem' }}>
-                <h2 className='text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 text-[#00192f]'>
-                  Svasthya Journal
-                </h2>
-                <h3 className='text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 text-[#00192f]'>
-                  Viewing Medicine From a Dharmic Lens
-                </h3>
-                <h4 className='text-lg xs:text-xl sm:text-2xl lg:text-3xl font-semibold mb-2 text-[#00192f]'>
-                  Add your submission before May 31st! 
-                </h4>
-                <a
-                  className='inline-block mt-2 bg-[#00192f] text-white font-bold py-2 px-6 rounded-full hover:bg-[#20394f] transition duration-300'
-                  href="https://docs.google.com/forms/d/e/1FAIpQLSciHFnECoF29AUQBEsHC_RWcCVlYCJsnKm7GPUwTWBD_WqRsA/viewform"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Add
-                </a>
-              </div>
+          
+          {/* Text Content Section */}
+          <div className='w-full lg:w-2/5 flex flex-col items-center lg:items-start'>
+            <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 text-[#00192f]'>
+              Svasthya
+            </h2>
+            <h3 className='text-xl sm:text-2xl lg:text-3xl font-bold mb-2 text-[#00192f]'>
+              HMSA National Conference
+            </h3>
+            <h4 className='text-lg sm:text-xl lg:text-2xl font-semibold mb-2 text-[#00192f]'>
+              July 12–13th, 2025
+            </h4>
+            <h4 className='text-lg sm:text-xl lg:text-2xl font-semibold mb-2 text-[#00192f]'>
+              AUM Ashram, San Antonio TX
+            </h4>
+            <p className='text-base sm:text-lg mb-8 text-[#00192f] text-center lg:text-left'>
+              <strong>Networking, Research, Mentorship and Seva <br />
+                A Dharmic Approach to Healthcare</strong>
+            </p>
+            <Link href="/register">
+              <button className='mt-4 bg-white text-hmsa-blue font-bold py-2 px-6 rounded-full hover:bg-gray-200 transition duration-300'>
+                Register
+              </button>
+            </Link>
+          </div>
+        </div>
+      </section>
+      <section
+        id='journal'
+        className="bg-[#548fcc] bg-cover bg-center min-h-screen flex items-center justify-center text-white px-4 py-12"
+      >
+        <div className='container mx-auto flex flex-col lg:flex-row-reverse items-center justify-center gap-8'>
+          {/* Journal Image Section (Right on desktop) */}
+          <div className='w-full lg:w-2/5 flex justify-center items-center'>
+            <div className='relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96'>
+              <Image
+                src='/book2.png'
+                alt='Journal Logo'
+                fill
+                style={{ objectFit: "contain" }}
+                className='rounded-lg'
+              />
             </div>
           </div>
-        </section>
+          
+          {/* Text Content Section (Left on desktop) */}
+          <div className='w-full lg:w-2/5 flex flex-col items-center lg:items-start'>
+            <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 text-[#00192f]'>
+              Svasthya Journal
+            </h2>
+            <h3 className='text-xl sm:text-2xl lg:text-3xl font-bold mb-2 text-[#00192f]'>
+              Viewing Medicine From a Dharmic Lens
+            </h3>
+            <h4 className='text-lg sm:text-xl lg:text-2xl font-semibold mb-6 text-[#00192f]'>
+              Add your submission before May 31st!
+            </h4>
+            <a
+              className='inline-block mt-2 bg-[#00192f] text-white font-bold py-2 px-6 rounded-full hover:bg-[#20394f] transition duration-300'
+              href="https://docs.google.com/forms/d/e/1FAIpQLSciHFnECoF29AUQBEsHC_RWcCVlYCJsnKm7GPUwTWBD_WqRsA/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Add
+            </a>
+          </div>
+        </div>
+      </section>
         <section
           id='home'
           className='min-h-screen flex flex-col items-center justify-center text-white px-4 py-8'>

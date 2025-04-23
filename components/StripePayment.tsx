@@ -101,8 +101,8 @@ function PaymentForm({ clientSecret, email, onPaymentComplete }: { clientSecret:
   };
 
   return (
-    <form onSubmit={handleSubmitPayment} className="p-4">
-      <h2 className="text-xl font-bold mb-4">Complete Your Payment</h2>
+    <form onSubmit={handleSubmitPayment} className="p-2 mb-4">
+     <h2 className="text-xl font-bold mb-4">Complete Your Payment</h2>
       
       <div className="mb-4">
         <LinkAuthenticationElement 
