@@ -39,8 +39,8 @@ export default function RegisterPage() {
     cityState: ''
   });
 
-  const studentPrice = 50; //price in cents
-  const nonStudentPrice = 100; //price in cents
+  const studentPrice = 5000; //price in cents
+  const nonStudentPrice = 10000; //price in cents
 
   
   const [errors, setErrors] = useState<FormErrors>({});
