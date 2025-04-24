@@ -65,6 +65,22 @@ const Page = () => {
       });
       setIsSubmitting(false);
       alert('Form submitted successfully!');
+
+          // Clear the form
+          setFormData({
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            stayPref: '',
+            travelMethod: '',
+            arrivalDetails: '',
+            departureDetails: '',
+            confSuggestions: '',
+            stayPrefOther: '',
+            travelMethodOther: '',
+          });
+
     } catch (error) {
       console.error('Error submitting form:', error);
       setIsSubmitting(false);
@@ -154,7 +170,7 @@ const Page = () => {
           </div>
 
           <div>
-            <label className="block mb-1">Travel Method *</label>
+            <label className="block mb-1">If you prefer to stay at a hotel, we have arranged a discount code for you to stay at a nearby hotel. Please book a room using this discount code:  *</label>
             <select
               name="travelMethod"
               value={formData.travelMethod}
