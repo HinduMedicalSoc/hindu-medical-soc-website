@@ -127,7 +127,7 @@ const Page = () => {
 
           <div>
             <label className="block mb-1">
-              Are you comfortable staying at a family's home from the organization? *
+              Are you comfortable staying at a family&apos;s home from the organization? *
             </label>
             <select
               name="stayPref"
