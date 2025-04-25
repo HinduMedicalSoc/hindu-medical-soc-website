@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
+
 export default function Header() {
   const [activeSection, setActiveSection] = useState("");
   const [isMobile, setIsMobile] = useState(false);
@@ -45,7 +46,7 @@ export default function Header() {
     }
   }, [pathname]);
 
-  const navItems = [
+  const navItemsDesktop = [
     { name: "Conference", href: "#conf" },
     { name: "Journal", href: "#journal" },
     { name: "Home", href: "#home" },
@@ -54,9 +55,18 @@ export default function Header() {
     { name: "Join Us", href: "#join" },
   ];
 
-  if (isMobile) {
-    return null; // Don't render the header on mobile devices
-  }
+  const navItemsMobile = [
+    { name: "Journal", href: "#journal" },
+    { name: "About Us", href: "#about" },
+    { name: "Home", href: "#home" },
+    { name: "Join Us", href: "#join" },
+    { name: "Events", href: "#events" },
+    
+  ];
+
+  const navItems = isMobile ? navItemsMobile : navItemsDesktop;
+
+  
 
   return (
     <header className="fixed top-6 left-1/2 transform -translate-x-1/2 bg-gray-100 bg-opacity-90 backdrop-blur-md z-50 rounded-2xl shadow-lg w-[90%] max-w-[900px]">
