@@ -224,14 +224,15 @@ export default function RegisterPage() {
           <li>Healthcare professionals and professors</li>
         </ul>
 
-
+        <h2 className="text-xl font-semibold mb-2 text-center">This form is for payment purposes only.</h2>
+        <h4 className='text-l mb-2 text-center'> After your payment, please use the Google Form linked below to confirm your registration.</h4>
 
         <div className="flex justify-center mb-6">
           <a 
             href="https://forms.gle/NSukmmaApizQrAYY6" 
             className="bg-[#00192f] text-white font-bold py-2 px-6 rounded-full hover:bg-blue-800 transition duration-300 flex items-center"
           >
-            Submit Travel Details
+            Register for Svasthya 2025
           </a>
         </div>
 
@@ -371,7 +372,7 @@ export default function RegisterPage() {
             type="submit"
             className="mt-4 bg-hmsa-blue text-white font-bold py-2 px-6 rounded-full hover:bg-blue-700 transition duration-300"
           >
-            Submit
+            Pay Now
           </button>
         </form>
         {/* Payment status messages */}
