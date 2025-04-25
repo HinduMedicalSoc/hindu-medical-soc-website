@@ -228,7 +228,7 @@ export default function RegisterPage() {
 
         <div className="flex justify-center mb-6">
           <a 
-            href="/travel" 
+            href="https://forms.gle/NSukmmaApizQrAYY6" 
             className="bg-[#00192f] text-white font-bold py-2 px-6 rounded-full hover:bg-blue-800 transition duration-300 flex items-center"
           >
             Submit Travel Details
