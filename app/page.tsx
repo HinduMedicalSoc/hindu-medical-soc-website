@@ -153,7 +153,7 @@ export default function Home() {
             HMSA National Conference
           </h3>
           <h4 className='text-lg sm:text-xl lg:text-2xl font-semibold mb-2 text-[#00192f] text-center w-full'>
-            July 12–13th, 2025
+            7pm Friday, July 11 – 12pm Sunday, July 13th, 2025
           </h4>
           <h4 className='text-lg sm:text-xl lg:text-2xl font-semibold mb-2 text-[#00192f] text-center w-full'>
             AUM Ashram, San Antonio TX

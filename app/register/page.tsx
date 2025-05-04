@@ -208,7 +208,7 @@ export default function RegisterPage() {
           Our national conference, <strong>Svasthya</strong>, provides a platform for individuals
           in healthcare to connect, discuss the integration of Hindu values in healthcare, and
           share their work with one another. The Svasthya 2025 national conference will take
-          place from <strong>July 12–13</strong> in <strong>San Antonio, Texas</strong> at <strong>Aum Ashram</strong>.
+          place from <strong>7pm Friday, July 11 – 12pm Sunday, July 13</strong> in <strong>San Antonio, Texas</strong> at <strong>Aum Ashram</strong>.
         </p>
         <p className="mb-4 text-sm italic">
           None of the details entered on this form will be listed/available publicly without your
