@@ -62,11 +62,11 @@ const AboutUs: React.FC = () => {
       </AnimatedSection>
       <AnimatedSection delay={100}>
         <p className="text-2xl text-gray-700 mb-8">
-          Hindu Medical Society of America (HMSA) provides a platform to connect
-          medical students, residents and professionals to understand medicine
-          through the lens of Hindu Dharma. By providing a platform for Sewa,
-          Education and Representation, HMSA aims to create a strong network of
-          physicians inspired by the Hindu Way of Life.
+        HMSA provides opportunities for its members to network and find mentors/mentees, 
+        participate in healthcare-related sewa activities, educate the community on both 
+        healthcare and Hindu culture, conduct and present research related to Hindu Dharma 
+        and medicine, and much more. Building a strong connection among present and future 
+        Hindu physicians will be valuable for the physicians, their patients, and the field of medicine.
         </p>
       </AnimatedSection>
       <AnimatedSection delay={200}>
@@ -75,13 +75,11 @@ const AboutUs: React.FC = () => {
             Mission Statement
           </h3>
           <p className="text-lg text-gray-700 mb-4 text-left">
-            HMSA provides opportunities for its members to network and find
-            mentors/mentees, participate in healthcare-related sewa activities,
-            educate the community on both healthcare and Hindu culture, conduct
-            and present research related to Hindu Dharma and medicine, and much
-            more. Building a strong connection among present and future Hindu
-            physicians will be valuable for the physicians, their patients, and
-            the field of medicine.
+          The Hindu Medical Society of America (HMSA) is a community of medical students, residents, 
+          and professionals committed to practicing medicine through the principles of Hindu Dharma. 
+          By offering opportunities for Networking, Sewa (selfless service), Education, and Research, 
+          HMSA empowers its members to integrate these values into their medical careers, fostering a 
+          compassionate and informed healthcare community.
           </p>
         </div>
       </AnimatedSection>

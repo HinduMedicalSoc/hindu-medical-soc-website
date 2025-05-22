@@ -225,15 +225,10 @@ export default function Home() {
                 />
               </div>
             </div>
-            <div className='w-full lg:w-1/2 text-center lg:text-left'>
+            <div className='w-full lg:w-1/2 text-center lg:text-center'>
               <h2 className='text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-bold mb-6'>
                 Welcome to HMSA
               </h2>
-              <p className='text-base xs:text-lg sm:text-xl mb-8 mx-auto lg:mx-0 max-w-md'>
-                Dedicated to fostering excellence in healthcare, promoting
-                cultural awareness, and serving communities through the
-                integration of Hindu principles and modern medicine.
-              </p>
               <div className='w-full flex justify-center lg:justify-start'>
                 <div className='relative w-full h-32 sm:h-40 max-w-[600px]'>
                   <Image
