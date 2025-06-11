@@ -124,7 +124,7 @@ export default function Home() {
   return (
     <div className='min-h-screen'>
       <SmoothScroll />
-      <Header />
+      <Header/>
       <main>
       <section
         id='conf'
