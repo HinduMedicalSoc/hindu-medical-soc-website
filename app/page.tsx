@@ -156,7 +156,7 @@ export default function Home() {
           Friday July 11th - Sunday July 13th
           </h4>
           <h4 className='text-lg sm:text-xl lg:text-2xl font-semibold mb-2 text-[#00192f] text-center w-full'>
-            AUM Ashram, San Antonio TX
+            AUM Ashram, San Antonio, TX
           </h4>
           <p className='text-base sm:text-lg mb-8 text-[#00192f] text-center w-full'>
             <strong>Networking, Research, Mentorship and Seva <br />
