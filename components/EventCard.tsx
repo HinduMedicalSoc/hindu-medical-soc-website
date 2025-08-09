@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 interface EventCardProps {
@@ -25,7 +26,7 @@ const EventCard: React.FC<EventCardProps> = ({
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
       <div className="relative w-full h-auto aspect-w-4 aspect-h-3">
-        <img
+        <Image
           src={`data:image/jpeg;base64,${imageUrl}`} // Display image using the buffer data
           alt={title}
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
