@@ -87,28 +87,28 @@ const AboutUs: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <AnimatedSection delay={400}>
           <VisionCard
-            imageSrc="/vision1a.jpg"
+            imageSrc="/networking_pillar.jpeg"
             title="Networking"
             description="Connect medical students, residents, fellows, and physicians with a shared interest in Hindu Dharma."
           />
         </AnimatedSection>
         <AnimatedSection delay={500}>
           <VisionCard
-            imageSrc="/vision2.jpg"
+            imageSrc="/education_pillar.jpeg"
             title="Education"
             description="Educate about the Hindu perspectives, philosophies and practices relating to healthcare."
           />
         </AnimatedSection>
         <AnimatedSection delay={600}>
           <VisionCard
-            imageSrc="/vision4.jpg"
+            imageSrc="/sewa_pillar.jpeg"
             title="Sewa"
             description="Engage in outreach programs to serve diverse communities in need."
           />
         </AnimatedSection>
         <AnimatedSection delay={700}>
           <VisionCard
-            imageSrc="/vision3.jpg"
+            imageSrc="/research_pillar.jpeg"
             title="Research"
             description="Grow our understanding of the connection between modern medicine and Hindu Dharma."
           />
