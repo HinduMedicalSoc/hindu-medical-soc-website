@@ -24,7 +24,7 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["conf", "journal", "home", "about", "events", "join"];
+      const sections = ["home", "about", "events", "join"]; //"conf", "journal",
       const currentSection = sections.find((section) => {
         const element = document.getElementById(section);
         if (element) {
@@ -47,8 +47,8 @@ export default function Header() {
   }, [pathname]);
 
   const navItemsDesktop = [
-    { name: "Conference", href: "#conf" },
-    { name: "Journal", href: "#journal" },
+    //{ name: "Conference", href: "#conf" },
+    //{ name: "Journal", href: "#journal" },
     { name: "Home", href: "#home" },
     { name: "About Us", href: "#about" },
     { name: "Events", href: "#events" },
@@ -56,7 +56,7 @@ export default function Header() {
   ];
 
   const navItemsMobile = [
-    { name: "Journal", href: "#journal" },
+    //{ name: "Journal", href: "#journal" },
     { name: "About Us", href: "#about" },
     { name: "Home", href: "#home" },
     { name: "Join Us", href: "#join" },

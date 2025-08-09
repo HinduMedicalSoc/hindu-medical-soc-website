@@ -1,0 +1,84 @@
+<section
+        id='conf'
+        className="bg-[#be9448] bg-cover bg-center min-h-screen flex items-center justify-center text-white px-4 py-12"
+      >
+        <div className='container mx-auto flex flex-col lg:flex-row items-center justify-center gap-8'>
+          {/* Logo Section */}
+          <div className='w-full lg:w-2/5 flex justify-center items-center'>
+            <div className='relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96'>
+              <Image
+                src='/conf2.png'
+                alt='Conf Logo'
+                fill
+                style={{ objectFit: "contain" }}
+                className='rounded-lg'
+              />
+            </div>
+          </div>
+          
+          {/* Text Content Section */}
+        <div className='w-full lg:w-2/5 flex flex-col items-center'>
+          <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 text-[#00192f] text-center w-full'>
+            Svasthya
+          </h2>
+          <h3 className='text-xl sm:text-2xl lg:text-3xl font-bold mb-2 text-[#00192f] text-center w-full'>
+            HMSA National Conference
+          </h3>
+          <h4 className='text-lg sm:text-xl lg:text-2xl font-semibold mb-2 text-[#00192f] text-center w-full'>
+          Friday July 11th - Sunday July 13th
+          </h4>
+          <h4 className='text-lg sm:text-xl lg:text-2xl font-semibold mb-2 text-[#00192f] text-center w-full'>
+            AUM Ashram, San Antonio, TX
+          </h4>
+          <p className='text-base sm:text-lg mb-8 text-[#00192f] text-center w-full'>
+            <strong>Networking, Research, Mentorship and Seva <br />
+              A Dharmic Approach to Healthcare</strong>
+          </p>
+          <Link href="/register">
+            <button className='mt-4 bg-white text-hmsa-blue font-bold py-2 px-6 rounded-full hover:bg-gray-200 transition duration-300'>
+              Register
+            </button>
+          </Link>
+      </div>
+        </div>
+      </section>
+      <section
+        id='journal'
+        className="bg-[#548fcc] bg-cover bg-center min-h-screen flex items-center justify-center text-white px-4 py-12"
+      >
+        <div className='container mx-auto flex flex-col lg:flex-row-reverse items-center justify-center gap-8'>
+          {/* Journal Image Section (Right on desktop) */}
+          <div className='w-full lg:w-2/5 flex justify-center items-center'>
+            <div className='relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96'>
+              <Image
+                src='/book2.png'
+                alt='Journal Logo'
+                fill
+                style={{ objectFit: "contain" }}
+                className='rounded-lg'
+              />
+            </div>
+          </div>
+          
+          {/* Text Content Section (Left on desktop) */}
+        <div className='w-full lg:w-2/5 flex flex-col items-center'>
+          <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 text-[#00192f] text-center w-full'>
+            Svasthya Journal
+          </h2>
+          <h3 className='text-xl sm:text-2xl lg:text-3xl font-bold mb-2 text-[#00192f] text-center w-full'>
+            Viewing Medicine From a Dharmic Lens
+          </h3>
+          <h4 className='text-lg sm:text-xl lg:text-2xl font-semibold mb-6 text-[#00192f] text-center w-full'>
+            Add your submission before May 31st!
+          </h4>
+          <a
+            className='inline-block mt-2 bg-[#00192f] text-white font-bold py-2 px-6 rounded-full hover:bg-[#20394f] transition duration-300'
+            href="https://docs.google.com/forms/d/e/1FAIpQLSciHFnECoF29AUQBEsHC_RWcCVlYCJsnKm7GPUwTWBD_WqRsA/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Add
+          </a>
+        </div>
+        </div>
+      </section>
