@@ -27,10 +27,13 @@ const EventCard: React.FC<EventCardProps> = ({
     <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
       <div className="relative w-full h-auto aspect-w-4 aspect-h-3">
         <Image
-          src={`data:image/jpeg;base64,${imageUrl}`} // Display image using the buffer data
-          alt={title}
-          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-        />
+  src={`data:image/jpeg;base64,${imageUrl}`}
+  alt={title}
+  width={400}  // Add this
+  height={300} // Add this
+  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+/>
+
       </div>
       <div className="p-4">
         <h3 className="text-lg font-semibold mb-1 text-[#00192F]">{title}</h3>
