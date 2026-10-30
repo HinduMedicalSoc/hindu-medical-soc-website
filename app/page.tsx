@@ -7,7 +7,7 @@ import AnimatedAboutUs from "../components/AnimatedAboutUs";
 import EventCard from "../components/EventCard";
 import SmoothScroll from "@/components/SmoothScroll";
 import AdminLoginModal from "../components/AdminLoginModal";
-import { Mail, Clock, Video, ExternalLink, Sparkles, X, Instagram } from "lucide-react";
+import { Mail, Clock, Video, ExternalLink, X, Instagram } from "lucide-react";
 import { db } from "@/lib/firebase";
 import {
   collection,
@@ -332,8 +332,7 @@ export default function Home() {
                   <div className='flex-1 flex flex-col justify-between text-white w-full'>
                     <div>
                       <div className='flex flex-wrap items-center gap-2 mb-1.5'>
-                        <span className='inline-flex items-center gap-1 bg-amber-400 text-hmsa-blue text-xs font-extrabold uppercase tracking-wide px-2.5 py-0.5 rounded-full shadow-sm'>
-                          <Sparkles size={12} />
+                        <span className='inline-flex items-center bg-amber-400 text-hmsa-blue text-xs font-extrabold uppercase tracking-wide px-2.5 py-0.5 rounded-full shadow-sm'>
                           Biweekly Meetings
                         </span>
                         <span className='text-amber-200 text-xs font-medium'>
