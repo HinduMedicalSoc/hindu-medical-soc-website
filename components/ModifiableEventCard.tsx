@@ -27,13 +27,29 @@ const ModifiableEventCard: React.FC<ModifiableEventCardProps> = ({
 
   
 
+  const resolveImageSrc = (src: string) => {
+    if (!src || src.trim() === "") return "/hmsa.png";
+    if (
+      src.startsWith("/") ||
+      src.startsWith("http://") ||
+      src.startsWith("https://") ||
+      src.startsWith("data:")
+    ) {
+      return src;
+    }
+    return `data:image/jpeg;base64,${src}`;
+  };
+
+  const imageSrc = resolveImageSrc(imageUrl);
+
   return (
     <div className='bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1'>
       <div className='relative w-full h-auto aspect-w-4 aspect-h-3'>
         <Image
-          src={`data:image/jpeg;base64,${imageUrl}`}
+          src={imageSrc}
           alt={title}
           fill
+          unoptimized
           style={{ objectFit: "cover" }}
           className='transition-transform duration-300 hover:scale-105'
         />
